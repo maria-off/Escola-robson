@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha Individual — Pré-Conselho de Classe</title>
+<style>
+:root{
+  --azul-900:#0a2540;--azul-800:#10375c;--azul-700:#1b4f8a;--azul-600:#2563a8;
+  --azul-500:#3b82d6;--azul-100:#e8f1fb;
+  --cinza-900:#1f2937;--cinza-700:#4b5563;--cinza-500:#6b7280;--cinza-300:#d1d5db;
+  --cinza-200:#e5e7eb;--cinza-100:#f3f4f6;--cinza-50:#f8fafc;
+  --branco:#ffffff;--verde:#15803d;--verde-bg:#dcfce7;--vermelho:#b91c1c;--vermelho-bg:#fee2e2;--amarelo:#b45309;
+  --radius:14px;--radius-sm:10px;
+  --sombra:0 4px 16px rgba(15,23,42,.08);--sombra-lg:0 18px 45px rgba(15,23,42,.22);
+  --transicao:.2s ease;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:'Segoe UI',Roboto,Arial,sans-serif;background:#f4f7fb;color:var(--cinza-900);line-height:1.5}
+h1,h2,h3,h4,h5,p{margin:0}
+button{font-family:inherit}
+.hidden{display:none !important}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:.9rem;padding:11px 18px;border-radius:var(--radius-sm);border:1.5px solid transparent;cursor:pointer;transition:var(--transicao);white-space:nowrap}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--azul-700);color:#fff;box-shadow:0 4px 12px rgba(27,79,138,.28)}
+.btn-primary:hover{background:var(--azul-600)}
+.btn-ghost{background:var(--branco);color:var(--azul-700);border-color:var(--cinza-300)}
+.btn-ghost:hover{background:var(--cinza-100)}
+.btn-danger{background:var(--vermelho);color:#fff}
+.btn-danger:hover{filter:brightness(1.08)}
+.btn-block{width:100%}
+.btn-sm{padding:7px 12px;font-size:.79rem;border-radius:8px;gap:6px}
+
+.campo{display:flex;flex-direction:column;gap:6px;font-size:.8rem;font-weight:700;color:var(--cinza-700)}
+.campo input,.campo select,.campo textarea{font:inherit;font-weight:400;font-size:.92rem;color:var(--cinza-900);padding:11px 13px;width:100%;border:1.5px solid var(--cinza-300);border-radius:var(--radius-sm);background:var(--branco);transition:var(--transicao)}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--azul-500);box-shadow:0 0 0 3px rgba(59,130,214,.16)}
+.campo input:disabled,.campo select:disabled{background:var(--cinza-100);color:var(--cinza-500);cursor:not-allowed}
+.campo small{font-size:.72rem;font-weight:500;color:var(--cinza-500);margin-top:2px}
+textarea{resize:vertical;min-height:92px;line-height:1.6;font-size:.92rem}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b7280' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+
+/* ===== LOGIN ===== */
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,#0a2540 0%,#1b4f8a 55%,#3b82d6 100%)}
+.login-card{width:100%;max-width:520px;background:var(--branco);border-radius:22px;padding:38px 36px 32px;box-shadow:var(--sombra-lg)}
+.login-brand{text-align:center;margin-bottom:26px}
+.brand-badge{width:60px;height:60px;margin:0 auto 14px;border-radius:18px;background:linear-gradient(135deg,var(--azul-700),var(--azul-500));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.25rem;box-shadow:0 8px 20px rgba(27,79,138,.35)}
+.brand-badge.small{width:42px;height:42px;font-size:.9rem;border-radius:12px;margin:0;box-shadow:none}
+.login-brand h1{font-size:1.02rem;color:var(--azul-900);line-height:1.35}
+.login-brand p{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--cinza-500);margin-top:6px}
+.login-brand .doc-title{display:inline-block;margin-top:14px;padding:6px 14px;border-radius:999px;background:var(--azul-100);color:var(--azul-700);font-size:.76rem;font-weight:700}
+.rotulo-grupo{font-size:.8rem;font-weight:700;color:var(--cinza-700);margin-bottom:10px;display:block}
+.profile-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+.profile-option{position:relative;cursor:pointer}
+.profile-option input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+.profile-content{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;border:2px solid var(--cinza-200);border-radius:var(--radius);padding:16px 12px;background:var(--cinza-50);transition:var(--transicao)}
+.profile-content .icon{font-size:1.5rem;line-height:1}
+.profile-content strong{font-size:.9rem;color:var(--azul-900)}
+.profile-content small{font-size:.72rem;color:var(--cinza-500)}
+.profile-option input:checked + .profile-content{border-color:var(--azul-600);background:var(--azul-100);box-shadow:0 0 0 3px rgba(37,99,168,.12)}
+.login-erro{margin-top:14px;font-size:.83rem;font-weight:600;color:var(--vermelho);background:var(--vermelho-bg);border-radius:var(--radius-sm);padding:10px 14px;text-align:center}
+.login-info{margin-top:12px;font-size:.76rem;color:var(--cinza-500);text-align:center;line-height:1.5}
+.login-info code{background:var(--cinza-100);padding:2px 6px;border-radius:4px;font-size:.72rem;color:var(--azul-700)}
+
+/* ===== TOPBAR ===== */
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px 24px;background:var(--azul-900);color:#fff;box-shadow:0 2px 14px rgba(10,37,64,.28)}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-left strong{display:block;font-size:.83rem}
+.topbar-left small{display:block;font-size:.68rem;color:#a9c4e4;text-transform:uppercase}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.user-chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);padding:7px 14px;border-radius:999px;font-size:.8rem;font-weight:600}
+.topbar .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35);padding:8px 16px;font-size:.83rem}
+.topbar .btn-ghost:hover{background:rgba(255,255,255,.14)}
+
+.container{max-width:1260px;margin:0 auto;padding:26px 22px 70px}
+.page-intro{margin-bottom:22px}
+.page-intro h2{font-size:1.35rem;color:var(--azul-800)}
+.page-intro p{font-size:.9rem;color:var(--cinza-500);margin-top:4px}
+.card{background:var(--branco);border-radius:var(--radius);box-shadow:var(--sombra);padding:26px}
+
+/* ===== ABAS DO ADMIN ===== */
+.admin-tabs{display:flex;gap:6px;border-bottom:2px solid var(--cinza-200);margin-bottom:22px;flex-wrap:wrap}
+.admin-tab{background:transparent;border:none;padding:12px 20px;font-size:.9rem;font-weight:700;color:var(--cinza-500);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:var(--transicao);display:inline-flex;align-items:center;gap:8px}
+.admin-tab:hover{color:var(--azul-700)}
+.admin-tab.ativo{color:var(--azul-700);border-bottom-color:var(--azul-700)}
+.admin-tab .cont{background:var(--azul-100);color:var(--azul-700);font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:999px}
+
+.doc-cabecalho{text-align:center;border-bottom:2px solid var(--azul-900);padding-bottom:16px;margin-bottom:26px}
+.doc-cabecalho h3{font-size:1.05rem;color:var(--azul-900)}
+.doc-cabecalho p{font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:var(--cinza-500);margin:6px 0 12px}
+.doc-cabecalho h4{display:inline-block;font-size:.85rem;color:var(--azul-700);background:var(--azul-100);padding:7px 18px;border-radius:999px}
+.grid-ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin-bottom:28px}
+
+.secao{border:1px solid var(--cinza-200);border-radius:var(--radius);padding:6px 20px 22px;margin:0 0 22px;background:var(--branco)}
+.secao legend{font-size:.76rem;font-weight:800;text-transform:uppercase;color:var(--azul-700);background:var(--azul-100);padding:7px 14px;border-radius:8px}
+.questao{margin-top:18px}
+.questao label{display:block;font-size:.88rem;font-weight:600;color:var(--cinza-700);margin-bottom:8px}
+.questao label::before{content:"•";color:var(--azul-500);font-weight:900;margin-right:8px}
+.form-acoes{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px}
+.status-salvo{font-size:.83rem;font-weight:600;color:var(--verde)}
+
+/* ===== LISTA DE ALUNOS (referência) ===== */
+.alunos-secao{border:1.5px solid var(--azul-500);border-radius:var(--radius);background:#f5faff;margin-bottom:22px;overflow:hidden}
+.alunos-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 20px;background:var(--azul-700);color:#fff}
+.alunos-head h3{font-size:.95rem;display:flex;align-items:center;gap:8px}
+.alunos-head small{font-size:.72rem;color:#c7def6;display:block;font-weight:500;margin-top:2px}
+.alunos-head .cont-badge{background:rgba(255,255,255,.22);padding:5px 14px;border-radius:999px;font-size:.78rem;font-weight:700}
+.alunos-lista{padding:16px 20px;display:flex;flex-wrap:wrap;gap:8px;background:#fff}
+.alunos-aviso{padding:20px;text-align:center;color:var(--cinza-500);font-size:.9rem;font-style:italic;background:#fff}
+.aluno-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--azul-100);color:var(--azul-800);
+  padding:6px 13px;border-radius:999px;
+  font-size:.82rem;font-weight:600;
+  border:1px solid #c7def6;transition:var(--transicao);
+}
+.aluno-chip:hover{background:var(--azul-500);color:#fff;border-color:var(--azul-500)}
+.aluno-chip .num{
+  background:var(--azul-700);color:#fff;font-size:.66rem;font-weight:800;
+  width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+}
+.aluno-chip:hover .num{background:#fff;color:var(--azul-700)}
+
+/* ===== LISTA / TABELA ===== */
+.lista-card{margin-top:24px}
+.lista-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.lista-head h3{font-size:1rem;color:var(--azul-800)}
+.badge{display:inline-block;padding:3px 11px;border-radius:999px;font-size:.71rem;font-weight:800;background:var(--azul-100);color:var(--azul-700)}
+.badge-turno{background:#fff7e6;color:#b45309}
+.badge-verde{background:var(--verde-bg);color:var(--verde)}
+.fichas-lista{display:flex;flex-direction:column;gap:12px}
+.ficha-item{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border:1px solid var(--cinza-200);border-left:4px solid var(--azul-500);border-radius:var(--radius-sm);padding:14px 16px;background:var(--cinza-50)}
+.ficha-item strong{font-size:.94rem;color:var(--azul-900);margin-right:8px}
+.ficha-item p{font-size:.79rem;color:var(--cinza-500);margin-top:5px}
+.ficha-item-acoes{display:flex;gap:8px;flex-wrap:wrap}
+.vazio{font-size:.88rem;color:var(--cinza-500);font-style:italic;padding:14px 4px;text-align:center}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:22px}
+.stat{background:var(--branco);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--sombra);border-top:4px solid var(--azul-600)}
+.stat-num{display:block;font-size:1.7rem;font-weight:800;color:var(--azul-800)}
+.stat-lbl{display:block;font-size:.74rem;text-transform:uppercase;color:var(--cinza-500);margin-top:5px;font-weight:700}
+.filtros{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;align-items:end}
+.filtros .btn{height:44px}
+.filtro-busca{position:relative}
+.filtro-busca input{padding-left:36px}
+.filtro-busca::before{content:"🔍";position:absolute;left:12px;top:38px;font-size:.9rem;pointer-events:none}
+.limpar-filtros{text-align:right;margin-top:14px}
+.limpar-filtros button{background:transparent;border:none;color:var(--azul-700);font-weight:700;font-size:.82rem;cursor:pointer;text-decoration:underline}
+.limpar-filtros button:hover{color:var(--azul-500)}
+
+.tabela-wrap{background:var(--branco);border-radius:var(--radius);box-shadow:var(--sombra);overflow-x:auto}
+table.tabela-admin{width:100%;border-collapse:collapse;min-width:1000px}
+table.tabela-admin thead th{background:var(--cinza-100);text-align:left;font-size:.72rem;font-weight:800;text-transform:uppercase;color:var(--cinza-700);padding:15px 16px;border-bottom:1px solid var(--cinza-200)}
+table.tabela-admin tbody td{padding:15px 16px;border-bottom:1px solid var(--cinza-100);font-size:.88rem}
+table.tabela-admin tbody tr:hover{background:var(--azul-100)}
+td .acoes{display:flex;gap:8px;flex-wrap:wrap}
+.text-muted{color:var(--cinza-500);font-size:.82rem}
+.tabela-vazia{text-align:center;color:var(--cinza-500);font-style:italic;padding:38px 16px !important}
+
+/* ===== PROFESSORES ===== */
+.prof-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:22px;align-items:start}
+.prof-form{background:var(--branco);border-radius:var(--radius);box-shadow:var(--sombra);padding:24px}
+.prof-form h3{font-size:1rem;color:var(--azul-800);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--cinza-200)}
+.prof-lista{background:var(--branco);border-radius:var(--radius);box-shadow:var(--sombra);padding:24px}
+.prof-lista h3{font-size:1rem;color:var(--azul-800);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--cinza-200);display:flex;justify-content:space-between;align-items:center}
+.prof-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border:1px solid var(--cinza-200);border-left:4px solid var(--verde);border-radius:var(--radius-sm);margin-bottom:10px;background:var(--cinza-50);flex-wrap:wrap}
+.prof-item-info{flex:1;min-width:200px}
+.prof-item-info strong{display:block;font-size:.92rem;color:var(--azul-900);margin-bottom:4px}
+.prof-item-info .cred{display:block;font-size:.74rem;color:var(--azul-700);background:var(--azul-100);padding:3px 9px;border-radius:6px;display:inline-block;margin-right:6px;margin-top:3px;font-weight:600}
+.prof-item-info .disp{display:block;font-size:.74rem;color:var(--cinza-500);margin-top:5px}
+.prof-item-info .obs-prof{display:block;font-size:.74rem;color:var(--cinza-500);margin-top:3px;font-style:italic}
+.prof-item-acoes{display:flex;gap:6px}
+@media (max-width:900px){ .prof-grid{grid-template-columns:1fr} }
+
+/* ===== MODAIS ===== */
+.modal-overlay{position:fixed;inset:0;z-index:60;padding:20px;display:flex;align-items:center;justify-content:center;background:rgba(10,37,64,.55)}
+.modal{background:var(--branco);border-radius:18px;width:100%;max-width:900px;max-height:92vh;display:flex;flex-direction:column;box-shadow:var(--sombra-lg)}
+.modal-sm{max-width:470px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;border-bottom:1px solid var(--cinza-200)}
+.modal-head h3{font-size:1.02rem;color:var(--azul-800)}
+.modal-close{border:none;background:var(--cinza-100);color:var(--cinza-700);width:34px;height:34px;border-radius:10px;font-size:1.3rem;cursor:pointer}
+.modal-close:hover{background:var(--vermelho-bg);color:var(--vermelho)}
+.modal-body{padding:26px;overflow-y:auto}
+.modal-body > p{font-size:.92rem}
+.modal-foot{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;padding:16px 24px;border-top:1px solid var(--cinza-200);background:var(--cinza-50);border-radius:0 0 18px 18px}
+
+/* ===== DOCUMENTO ===== */
+.doc-head{text-align:center;border-bottom:2px solid var(--azul-900);padding-bottom:14px;margin-bottom:20px}
+.doc-head h3{font-size:1.03rem;color:var(--azul-900)}
+.doc-head p{font-size:.72rem;text-transform:uppercase;color:var(--cinza-500);margin:6px 0 12px}
+.doc-head h4{display:inline-block;font-size:.82rem;color:var(--azul-700);background:var(--azul-100);padding:6px 16px;border-radius:999px}
+.doc-ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px}
+.doc-ident > div{border:1px solid var(--cinza-200);border-radius:10px;padding:10px 13px;background:var(--cinza-50)}
+.doc-ident span{display:block;font-size:.65rem;text-transform:uppercase;color:var(--cinza-500);margin-bottom:4px;font-weight:700}
+.doc-ident strong{font-size:.9rem;font-weight:600;color:var(--azul-900)}
+.doc-secao{margin-bottom:22px}
+.doc-secao h5{font-size:.75rem;text-transform:uppercase;color:#fff;background:var(--azul-700);padding:9px 15px;border-radius:8px;margin-bottom:14px}
+.doc-questao{margin-bottom:15px}
+.doc-questao .rotulo{font-size:.84rem;font-weight:700;color:var(--cinza-700);margin-bottom:7px}
+.doc-questao .resposta{white-space:pre-wrap;font-size:.9rem;line-height:1.65;background:var(--cinza-50);border-left:3px solid var(--azul-500);border-radius:0 8px 8px 0;padding:11px 15px;min-height:46px}
+.doc-questao .resposta.vazia{color:var(--cinza-500);font-style:italic}
+.doc-lista-alunos{display:flex;flex-wrap:wrap;gap:8px;padding:12px 15px;background:var(--cinza-50);border-radius:8px;border:1px solid var(--cinza-200)}
+.doc-lista-alunos .chip{background:#fff;border:1px solid var(--azul-500);color:var(--azul-800);padding:4px 11px;border-radius:999px;font-size:.82rem;font-weight:600}
+.doc-rodape{margin-top:34px;padding-top:18px;border-top:1px dashed var(--cinza-300);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.doc-rodape span{display:block;font-size:.63rem;text-transform:uppercase;color:var(--cinza-500);font-weight:700}
+.doc-rodape strong{font-size:.82rem;color:var(--azul-900)}
+.assinatura{border-top:1.5px solid var(--cinza-700);padding-top:7px;min-width:230px;font-size:.75rem;text-align:center}
+
+.toast-container{position:fixed;right:22px;bottom:22px;z-index:120;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.toast{display:flex;align-items:flex-start;gap:10px;background:#fff;border-left:5px solid var(--azul-600);border-radius:12px;padding:14px 18px;min-width:270px;max-width:360px;box-shadow:var(--sombra-lg);font-size:.87rem;font-weight:600}
+.toast.sucesso{border-left-color:var(--verde);background:#f0fdf4}
+.toast.erro{border-left-color:var(--vermelho);background:#fef2f2}
+.toast.info{border-left-color:var(--amarelo);background:#fffbeb}
+
+#printArea{display:none}
+@media print{
+  @page{margin:12mm 10mm;size:A4}
+  body{background:#fff !important}
+  body > *:not(#printArea){display:none !important}
+  #printArea{display:block !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #printArea .doc-secao h5{background:#1b4f8a !important;color:#fff !important}
+  .doc-secao{break-inside:avoid}
+}
+
+@media (max-width:700px){
+  .login-card{padding:28px 22px}
+  .profile-options{grid-template-columns:1fr}
+  .container{padding:18px 14px 60px}
+  .card{padding:20px 16px}
+  .topbar{padding:10px 14px}
+  .topbar-left small{display:none}
+  .modal-foot .btn{flex:1 1 100%}
+}
+</style>
+</head>
+<body>
+
+<div id="printArea"></div>
+
+<!-- ============================ LOGIN ============================ -->
+<section id="loginScreen" class="login-screen">
+  <div class="login-card" id="loginCard">
+    <div class="login-brand">
+      <div class="brand-badge">EC</div>
+      <h1>ECLA ESTADUAL DO CAMPO FREI GRACIANO DROESSLER</h1>
+      <p>Ensino Fundamental em Tempo Integral</p>
+      <span class="doc-title">Ficha Individual — Pré-Conselho de Classe</span>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <span class="rotulo-grupo">Escolha seu perfil de acesso</span>
+
+      <div class="profile-options">
+        <label class="profile-option">
+          <input type="radio" name="perfil" value="professor" checked>
+          <span class="profile-content">
+            <span class="icon">👩‍🏫</span>
+            <strong>Professor(a)</strong>
+            <small>@escola ou senha</small>
+          </span>
+        </label>
+        <label class="profile-option">
+          <input type="radio" name="perfil" value="admin">
+          <span class="profile-content">
+            <span class="icon">👨‍💼</span>
+            <strong>Administrador</strong>
+            <small>Diretor(a)</small>
+          </span>
+        </label>
+      </div>
+
+      <label class="campo" id="campoSenhaWrap">
+        <span id="rotuloLogin">SEU @ESCOLA OU SENHA PESSOAL</span>
+        <input type="text" id="senha" placeholder="Ex.: maria.silva@escola  ou  senha123" autocomplete="username">
+      </label>
+
+      <button type="submit" class="btn btn-primary btn-block" style="margin-top:20px">Entrar no sistema</button>
+
+      <p id="loginErro" class="login-erro hidden" role="alert"></p>
+      <p class="login-info" id="loginInfo">
+        Professores: use o <strong>@escola</strong> ou a <strong>senha pessoal</strong> cadastrada pelo diretor.
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- ============================ APP ============================ -->
+<div id="appScreen" class="hidden">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand-badge small">EC</div>
+      <div>
+        <strong>ECLA ESTADUAL DO CAMPO FREI GRACIANO DROESSLER</strong>
+        <small>Ensino Fundamental em Tempo Integral</small>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="user-chip" id="userChip"></span>
+      <button class="btn btn-ghost" id="btnSair" type="button">Sair</button>
+    </div>
+  </header>
+
+  <!-- ============================ PROFESSOR ============================ -->
+  <section id="viewProfessor" class="view hidden">
+    <div class="container">
+      <div class="page-intro">
+        <h2>Preenchimento da Ficha Individual</h2>
+        <p>Escolha o turno, a turma e o componente. Depois preencha as seções e clique em <strong>Salvar Ficha</strong>.</p>
+      </div>
+
+      <form id="fichaForm" class="card" novalidate>
+        <input type="hidden" id="fichaId" value="">
+
+        <div class="doc-cabecalho">
+          <h3>ECLA ESTADUAL DO CAMPO FREI GRACIANO DROESSLER</h3>
+          <p>Ensino Fundamental em Tempo Integral</p>
+          <h4>FICHA INDIVIDUAL — PRÉ-CONSELHO DE CLASSE</h4>
+        </div>
+
+        <div class="grid-ident">
+          <label class="campo"><span>TURNO</span><select id="turno" required>
+            <option value="">Selecione o turno...</option>
+            <option value="Matutino">🌅 Matutino</option>
+            <option value="Vespertino">🌇 Vespertino</option>
+          </select></label>
+
+          <label class="campo"><span>TURMA</span><select id="turma" required disabled>
+            <option value="">Selecione o turno primeiro</option>
+          </select></label>
+
+          <label class="campo"><span>COMPONENTE CURRICULAR</span><select id="componente" required></select></label>
+
+          <label class="campo">
+            <span>PROFESSOR(A)</span>
+            <input type="text" id="professor" readonly style="background:var(--azul-100);color:var(--azul-800);font-weight:700;cursor:not-allowed">
+            <small>Preenchido automaticamente pelo seu login</small>
+          </label>
+
+          <label class="campo"><span>DATA</span><input type="date" id="dataFicha" required></label>
+        </div>
+
+        <!-- Lista de alunos (referência) -->
+        <section class="alunos-secao" id="alunosSecao">
+          <div class="alunos-head">
+            <div>
+              <h3>👥 Alunos da Turma</h3>
+              <small id="alunosSubtitulo">Selecione o turno e a turma para visualizar os alunos</small>
+            </div>
+            <span class="cont-badge" id="alunosCont">0 alunos</span>
+          </div>
+          <div id="alunosAviso" class="alunos-aviso">Selecione o <strong>turno</strong> e a <strong>turma</strong> acima para carregar os alunos.</div>
+          <div id="alunosLista" class="alunos-lista hidden"></div>
+        </section>
+
+        <fieldset class="secao">
+          <legend>1. Panorama da Turma</legend>
+          <div class="questao">
+            <label for="panoramaDesenvolvimento">Como você avalia o desenvolvimento geral da turma em relação à aprendizagem?</label>
+            <textarea id="panoramaDesenvolvimento" rows="4"></textarea>
+          </div>
+          <div class="questao">
+            <label for="panoramaParticipacao">Como está a participação, o envolvimento e a postura dos estudantes nas aulas?</label>
+            <textarea id="panoramaParticipacao" rows="4"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="secao">
+          <legend>2. Aprendizagem e Frequência</legend>
+          <div class="questao">
+            <label for="dificuldades">Quais habilidades/conteúdos apresentam maior dificuldade para a turma?</label>
+            <textarea id="dificuldades" rows="4"></textarea>
+          </div>
+          <div class="questao">
+            <label for="frequencia">Há estudantes com baixa frequência ou que necessitam de acompanhamento mais próximo? Quais e por quê?</label>
+            <textarea id="frequencia" rows="4"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="secao">
+          <legend>3. Destaques e Situações que Merecem Atenção</legend>
+          <div class="questao">
+            <label for="destaques">Estudantes que se destacaram positivamente:</label>
+            <textarea id="destaques" rows="4"></textarea>
+          </div>
+          <div class="questao">
+            <label for="observacoes">Observações gerais e notas:</label>
+            <textarea id="observacoes" rows="4"></textarea>
+          </div>
+        </fieldset>
+
+        <div class="form-acoes">
+          <button type="submit" class="btn btn-primary">💾 Salvar Ficha</button>
+          <button type="button" class="btn btn-ghost" id="btnNovaFicha">📄 Nova Ficha</button>
+          <span class="status-salvo" id="statusSalvo"></span>
+        </div>
+      </form>
+
+      <section class="card lista-card">
+        <div class="lista-head">
+          <h3>Minhas fichas salvas</h3>
+          <span class="badge" id="contadorFichas">0</span>
+        </div>
+        <div id="listaMinhasFichas" class="fichas-lista"></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ============================ ADMIN ============================ -->
+  <section id="viewAdmin" class="view hidden">
+    <div class="container">
+      <div class="page-intro">
+        <h2>Painel do Administrador</h2>
+        <p>Gerencie fichas enviadas e professores cadastrados no sistema.</p>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab ativo" data-tab="fichas" type="button">📋 Fichas <span class="cont" id="tabContFichas">0</span></button>
+        <button class="admin-tab" data-tab="professores" type="button">👩‍🏫 Professores <span class="cont" id="tabContProfs">0</span></button>
+      </div>
+
+      <!-- === ABA FICHAS === -->
+      <div id="tabFichas" class="admin-panel">
+        <div class="stats" id="statsAdmin"></div>
+
+        <div class="card" style="margin-bottom:18px">
+          <div class="filtros">
+            <label class="campo filtro-busca">
+              <span>🔍 BUSCAR POR TURMA / SÉRIE</span>
+              <input type="text" id="buscaTurma" placeholder="Ex.: 3º Ano, 9º, 1º Ano A...">
+            </label>
+            <label class="campo filtro-busca">
+              <span>🔍 BUSCAR POR PROFESSOR</span>
+              <input type="text" id="buscaProfessor" placeholder="Digite o nome do professor...">
+            </label>
+            <label class="campo">
+              <span>TURNO</span>
+              <select id="filtroTurno">
+                <option value="">Todos os turnos</option>
+                <option value="Matutino">🌅 Matutino</option>
+                <option value="Vespertino">🌇 Vespertino</option>
+              </select>
+            </label>
+            <label class="campo">
+              <span>COMPONENTE</span>
+              <select id="filtroComponente"></select>
+            </label>
+          </div>
+          <div class="limpar-filtros">
+            <button type="button" id="btnLimparFiltros">↺ Limpar todos os filtros</button>
+          </div>
+        </div>
+
+        <div class="tabela-wrap">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Data</th><th>Turno</th><th>Turma</th><th>Componente</th><th>Professor(a)</th><th>Salvo em</th><th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="corpoTabela"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- === ABA PROFESSORES === -->
+      <div id="tabProfessores" class="admin-panel hidden">
+        <div class="prof-grid">
+
+          <!-- Formulário -->
+          <div class="prof-form">
+            <h3 id="profFormTitulo">➕ Cadastrar novo professor</h3>
+            <form id="profForm" novalidate>
+              <input type="hidden" id="profId" value="">
+
+              <label class="campo" style="margin-bottom:14px">
+                <span>NOME COMPLETO *</span>
+                <input type="text" id="profNome" placeholder="Ex.: Maria Aparecida da Silva" required>
+              </label>
+
+              <label class="campo" style="margin-bottom:14px">
+                <span>@ESCOLA *</span>
+                <input type="text" id="profEmail" placeholder="Ex.: maria.silva@escola" required>
+                <small>Login de acesso do professor (pode ser digitado sem o @escola também)</small>
+              </label>
+
+              <label class="campo" style="margin-bottom:14px">
+                <span>SENHA PESSOAL *</span>
+                <input type="text" id="profSenha" placeholder="Ex.: Maria2024" required>
+                <small>Alternativa de acesso caso esqueça o @escola</small>
+              </label>
+
+              <label class="campo" style="margin-bottom:14px">
+                <span>DISCIPLINAS QUE LECIONA</span>
+                <select id="profDisciplinas" multiple size="6"></select>
+                <small>Segure Ctrl (ou Cmd) para marcar várias</small>
+              </label>
+
+              <label class="campo" style="margin-bottom:18px">
+                <span>OBSERVAÇÕES (opcional)</span>
+                <input type="text" id="profObs" placeholder="Ex.: Coordenadora do matutino">
+              </label>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="submit" class="btn btn-primary">💾 Salvar professor</button>
+                <button type="button" class="btn btn-ghost" id="btnCancelarProf">Cancelar</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Lista -->
+          <div class="prof-lista">
+            <h3>
+              <span>👥 Professores cadastrados</span>
+              <span class="badge" id="contProf">0</span>
+            </h3>
+            <div id="listaProfessores"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ MODAIS ============================ -->
+<div id="modal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Ficha Completa</h3>
+      <button class="modal-close" id="btnFecharModalX" type="button">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-danger" id="btnExcluirModal" type="button">🗑 Excluir</button>
+      <button class="btn btn-ghost" id="btnImprimirModal" type="button">🖨 Imprimir / PDF</button>
+      <button class="btn btn-primary" id="btnFecharModal" type="button">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div id="confirmModal" class="modal-overlay hidden">
+  <div class="modal modal-sm">
+    <div class="modal-head">
+      <h3 id="confirmTitulo">Confirmar</h3>
+      <button class="modal-close" id="btnFecharConfirmX" type="button">×</button>
+    </div>
+    <div class="modal-body"><p id="confirmTexto"></p></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="btnCancelarExclusao" type="button">Cancelar</button>
+      <button class="btn btn-danger" id="btnConfirmarExclusao" type="button">Sim, confirmar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var STORAGE_FICHAS = 'preconselho_fichas_v4';
+  var STORAGE_PROFS  = 'preconselho_professores_v2';
+  var SENHA_ADMIN = 'admin123';
+
+  var TURMAS_POR_TURNO = {
+    'Matutino': ['9º Ano A','1º Ano A','1º Ano B','2º Ano A','2º Ano B','3º Ano A','3º Ano B'],
+    'Vespertino': ['6º Ano A','7º Ano A','8º Ano A','9º Ano A']
+  };
+
+  /* ⭐ ALUNOS POR TURMA — EDITE AQUI OS NOMES REAIS ⭐ */
+  var ALUNOS_POR_TURMA = {
+    '1º Ano A': ['Ana Beatriz Silva Santos','Bruno Henrique Oliveira','Carlos Eduardo Lima','Débora Cristina Souza','Enzo Gabriel Ferreira','Fernanda Alves Ribeiro','Gustavo Henrique Costa','Helena Martins Rocha','Igor Vinícius Almeida','Júlia Cardoso Pereira'],
+    '1º Ano B': ['Kaique Andrade Silva','Larissa Moreira Gomes','Matheus Barbosa Dias','Nicole Ferreira Araújo','Otávio Nunes Castro'],
+    '2º Ano A': ['Paulo Ricardo Mendes','Queren Souza Lopes','Rafael Augusto Pinto','Sofia Almeida Ramos','Thiago Carvalho Neves','Ursula Freitas Correia'],
+    '2º Ano B': ['Vinícius Teixeira Braga','Wesley Gonçalves Prado','Yasmin Duarte Campos','Zoe Ribeiro Monteiro'],
+    '3º Ano A': ['Alice Fernandes Moura','Bernardo Luiz Azevedo','Cecília Rocha Vieira','Daniel Farias Batista','Esther Nogueira Pires'],
+    '3º Ano B': ['Felipe Augusto Siqueira','Gabriela Martins Cunha','Heitor Oliveira Bastos','Isabela Costa Rezende'],
+    '6º Ano A': ['André Luiz Bezerra','Bianca Ferreira Tavares','Caio Henrique Marques','Diana Souza Coelho','Emanuelly Rocha Paiva'],
+    '7º Ano A': ['Fábio Junior Almeida','Giovanna Ribeiro Leal','Hugo Leonardo Peixoto','Isadora Martins Freire'],
+    '8º Ano A': ['João Pedro Sacramento','Kelly Cristina Brandão','Lucas Gabriel Fonseca','Mariana Alves Teles'],
+    '9º Ano A': ['Nathan Ferreira Quintela','Olívia Cardoso Bittencourt','Pedro Henrique Sales','Rafaela Souza Ramalho','Samuel Ribeiro Fontes']
+  };
+
+  var COMPONENTES = ['Arte','Ciências','Educação Física','Ensino Religioso','Geografia','História','Língua Inglesa','Língua Portuguesa','Matemática'];
+
+  var usuarioAtual = null;      // 'admin' | 'professor'
+  var professorLogado = null;   // objeto do professor quando logado
+  var fichaNoModal = null;
+  var callbackConfirmacao = null;
+
+  function $(sel,ctx){ return (ctx||document).querySelector(sel); }
+  function $$(sel,ctx){ return Array.from((ctx||document).querySelectorAll(sel)); }
+  function uid(){ return 'x'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+  function esc(v){
+    return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function norm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim(); }
+  function hojeISO(){ var d=new Date(), off=d.getTimezoneOffset(); return new Date(d.getTime()-off*60000).toISOString().slice(0,10); }
+  function dataBR(iso){ if(!iso) return '—'; var p=String(iso).split('-'); return p.length===3 ? p[2]+'/'+p[1]+'/'+p[0] : iso; }
+  function dataHoraBR(ts){ if(!ts) return '—'; var d=new Date(ts); if(isNaN(d.getTime())) return '—'; return d.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+  function iconeTurno(t){ return t==='Matutino'?'🌅':(t==='Vespertino'?'🌇':''); }
+  function toast(msg,tipo){
+    tipo=tipo||'sucesso';
+    var ic={sucesso:'✅',erro:'⚠️',info:'ℹ️'};
+    var el=document.createElement('div');
+    el.className='toast '+tipo;
+    el.innerHTML='<span>'+(ic[tipo]||'')+'</span><span>'+esc(msg)+'</span>';
+    $('#toastContainer').appendChild(el);
+    setTimeout(function(){
+      el.style.transition='opacity .3s, transform .3s';
+      el.style.opacity='0'; el.style.transform='translateX(26px)';
+      setTimeout(function(){ el.remove(); },320);
+    },3300);
+  }
+
+  /* ===== Persistência ===== */
+  function carregarFichas(){
+    try{ var raw=localStorage.getItem(STORAGE_FICHAS); var a=raw?JSON.parse(raw):[]; return Array.isArray(a)?a:[]; }
+    catch(e){ return []; }
+  }
+  function gravarFichas(l){ try{ localStorage.setItem(STORAGE_FICHAS,JSON.stringify(l)); return true; }catch(e){ toast('Não foi possível salvar.','erro'); return false; } }
+  function carregarProfessores(){
+    try{ var raw=localStorage.getItem(STORAGE_PROFS); var a=raw?JSON.parse(raw):[]; return Array.isArray(a)?a:[]; }
+    catch(e){ return []; }
+  }
+  function gravarProfessores(l){ try{ localStorage.setItem(STORAGE_PROFS,JSON.stringify(l)); return true; }catch(e){ toast('Não foi possível salvar.','erro'); return false; } }
+
+  function ordenarPorAtualizacao(a,b){
+    return String(b.atualizadoEm||b.criadoEm||'').localeCompare(String(a.atualizadoEm||a.criadoEm||''));
+  }
+  function ordenarProfPorNome(a,b){ return String(a.nome||'').localeCompare(String(b.nome||''),'pt-BR'); }
+
+  /* ===== Selects ===== */
+  function preencherSelect(sel,valores,ph){
+    sel.innerHTML = '<option value="">'+esc(ph)+'</option>' + valores.map(function(v){ return '<option value="'+esc(v)+'">'+esc(v)+'</option>'; }).join('');
+  }
+  function atualizarTurmasPorTurno(turno, valorAtual){
+    var sel = $('#turma');
+    if(!turno){ sel.disabled = true; sel.innerHTML = '<option value="">Selecione o turno primeiro</option>'; return; }
+    var lista = TURMAS_POR_TURNO[turno] || [];
+    sel.disabled = false;
+    sel.innerHTML = '<option value="">Selecione a turma...</option>' + lista.map(function(t){ return '<option value="'+esc(t)+'">'+esc(t)+'</option>'; }).join('');
+    if(valorAtual && lista.indexOf(valorAtual) > -1) sel.value = valorAtual;
+  }
+  function preencherSelectDisciplinas(){
+    var sel = $('#profDisciplinas');
+    sel.innerHTML = COMPONENTES.map(function(c){ return '<option value="'+esc(c)+'">'+esc(c)+'</option>'; }).join('');
+  }
+
+  /* ===== LOGIN ===== */
+  function tratarLogin(e){
+    e.preventDefault();
+    var perfil = ($('input[name="perfil"]:checked')||{}).value || 'professor';
+    var entrada = $('#senha').value.trim();
+    var erroEl = $('#loginErro');
+
+    if(!entrada){
+      erroEl.textContent = perfil==='admin' ? 'Digite a senha do administrador.' : 'Digite seu @escola ou senha pessoal.';
+      erroEl.classList.remove('hidden');
+      return;
+    }
+
+    if(perfil === 'admin'){
+      if(entrada !== SENHA_ADMIN){
+        erroEl.textContent = 'Senha do administrador incorreta.';
+        erroEl.classList.remove('hidden');
+        return;
+      }
+      erroEl.classList.add('hidden');
+      $('#senha').value='';
+      entrarAdmin();
+      return;
+    }
+
+    // Perfil professor — busca por @escola OU senha pessoal
+    var profs = carregarProfessores();
+    if(!profs.length){
+      erroEl.textContent = 'Nenhum professor cadastrado ainda. Peça ao diretor para cadastrar.';
+      erroEl.classList.remove('hidden');
+      return;
+    }
+
+    var entradaNorm = norm(entrada);
+    var prof = profs.find(function(p){
+      var emailNorm = norm(p.email);
+      var emailSemArroba = emailNorm.replace(/^@/,'');
+      var entradaSemArroba = entradaNorm.replace(/^@/,'');
+      // Confere @escola (com ou sem @)
+      if(emailNorm === entradaNorm) return true;
+      if(emailSemArroba === entradaSemArroba) return true;
+      // Confere senha pessoal
+      if(String(p.senha||'') === entrada) return true;
+      return false;
+    });
+
+    if(!prof){
+      erroEl.textContent = 'Não encontramos nenhum professor com esse @escola ou senha.';
+      erroEl.classList.remove('hidden');
+      return;
+    }
+
+    erroEl.classList.add('hidden');
+    $('#senha').value='';
+    entrarProfessor(prof);
+  }
+
+  function entrarAdmin(){
+    usuarioAtual = 'admin';
+    professorLogado = null;
+    $('#loginScreen').classList.add('hidden');
+    $('#appScreen').classList.remove('hidden');
+    $('#userChip').textContent = '👨‍💼 Diretor(a) — Administrador';
+    $('#viewProfessor').classList.add('hidden');
+    $('#viewAdmin').classList.remove('hidden');
+    trocarAbaAdmin('fichas');
+    renderAdmin();
+    renderProfessores();
+    toast('Bem-vindo(a), Diretor(a)!','sucesso');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function entrarProfessor(prof){
+    usuarioAtual = 'professor';
+    professorLogado = prof;
+    $('#loginScreen').classList.add('hidden');
+    $('#appScreen').classList.remove('hidden');
+    $('#userChip').textContent = '👩‍🏫 ' + prof.nome;
+    $('#viewAdmin').classList.add('hidden');
+    $('#viewProfessor').classList.remove('hidden');
+
+    if(!$('#dataFicha').value) $('#dataFicha').value = hojeISO();
+    // Preenche automaticamente o nome do professor (somente leitura)
+    $('#professor').value = prof.nome;
+
+    renderMinhasFichas();
+    toast('Bem-vindo(a), ' + prof.nome.split(' ')[0] + '!','sucesso');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function sair(){
+    usuarioAtual = null;
+    professorLogado = null;
+    fichaNoModal = null;
+    fecharModal(); fecharConfirmacao();
+    $('#appScreen').classList.add('hidden');
+    $('#loginScreen').classList.remove('hidden');
+    $('#viewProfessor').classList.add('hidden');
+    $('#viewAdmin').classList.add('hidden');
+    $('#loginErro').classList.add('hidden');
+    $('#senha').value = '';
+    limparFormulario();
+    atualizarRotuloLogin();
+    toast('Sessão encerrada.','info');
+  }
+
+  /* ===== ADMIN — ABAS ===== */
+  function trocarAbaAdmin(tab){
+    $$('.admin-tab').forEach(function(b){ b.classList.toggle('ativo', b.dataset.tab === tab); });
+    $('#tabFichas').classList.toggle('hidden', tab !== 'fichas');
+    $('#tabProfessores').classList.toggle('hidden', tab !== 'professores');
+  }
+
+  /* ===== ADMIN — FICHAS ===== */
+  function renderAdmin(){
+    var fichas = carregarFichas().slice().sort(ordenarPorAtualizacao);
+
+    var compAtual = $('#filtroComponente').value;
+    var comps = Array.from(new Set(fichas.map(function(f){return f.componente;}).filter(Boolean))).sort();
+    $('#filtroComponente').innerHTML = '<option value="">Todos os componentes</option>' +
+      comps.map(function(c){ return '<option value="'+esc(c)+'">'+esc(c)+'</option>'; }).join('');
+    if(comps.indexOf(compAtual) > -1) $('#filtroComponente').value = compAtual;
+
+    $('#tabContFichas').textContent = fichas.length;
+    $('#tabContProfs').textContent  = carregarProfessores().length;
+
+    aplicarFiltrosAdmin(fichas);
+  }
+  function aplicarFiltrosAdmin(todas){
+    var buscaT = norm($('#buscaTurma').value);
+    var buscaP = norm($('#buscaProfessor').value);
+    var fTurno = $('#filtroTurno').value;
+    var fComp  = $('#filtroComponente').value;
+
+    var filtradas = todas.filter(function(f){
+      if(fTurno && f.turno !== fTurno) return false;
+      if(fComp && f.componente !== fComp) return false;
+      if(buscaT && norm(f.turma).indexOf(buscaT) === -1) return false;
+      if(buscaP && norm(f.professor).indexOf(buscaP) === -1) return false;
+      return true;
+    });
+
+    renderTabelaAdmin(filtradas);
+    renderStatsAdmin(todas, filtradas);
+  }
+  function renderStatsAdmin(todas, filtradas){
+    var turmas = Array.from(new Set(todas.map(function(f){return f.turma;}).filter(Boolean))).length;
+    var profs  = Array.from(new Set(todas.map(function(f){return f.professor;}).filter(Boolean))).length;
+    $('#statsAdmin').innerHTML =
+      '<div class="stat"><span class="stat-num">'+todas.length+'</span><span class="stat-lbl">Fichas totais</span></div>'+
+      '<div class="stat"><span class="stat-num">'+filtradas.length+'</span><span class="stat-lbl">Exibidas no filtro</span></div>'+
+      '<div class="stat"><span class="stat-num">'+turmas+'</span><span class="stat-lbl">Turmas</span></div>'+
+      '<div class="stat"><span class="stat-num">'+profs+'</span><span class="stat-lbl">Professores ativos</span></div>';
+  }
+  function renderTabelaAdmin(fichas){
+    var corpo = $('#corpoTabela');
+    if(!fichas.length){
+      corpo.innerHTML = '<tr><td colspan="7" class="tabela-vazia">Nenhuma ficha encontrada com os filtros atuais.</td></tr>';
+      return;
+    }
+    corpo.innerHTML = fichas.map(function(f){
+      var badgeTurno = f.turno ? '<span class="badge badge-turno">'+iconeTurno(f.turno)+' '+esc(f.turno)+'</span>' : '<span class="text-muted">—</span>';
+      return '<tr>'+
+        '<td>'+dataBR(f.data)+'</td>'+
+        '<td>'+badgeTurno+'</td>'+
+        '<td><strong>'+esc(f.turma||'—')+'</strong></td>'+
+        '<td><span class="badge">'+esc(f.componente||'—')+'</span></td>'+
+        '<td>'+esc(f.professor||'—')+'</td>'+
+        '<td class="text-muted">'+dataHoraBR(f.atualizadoEm||f.criadoEm)+'</td>'+
+        '<td><div class="acoes">'+
+          '<button class="btn btn-primary btn-sm" data-acao="ver" data-id="'+f.id+'">👁 Ver</button>'+
+          '<button class="btn btn-ghost btn-sm" data-acao="imprimir" data-id="'+f.id+'">🖨 PDF</button>'+
+          '<button class="btn btn-danger btn-sm" data-acao="excluir" data-id="'+f.id+'">🗑 Excluir</button>'+
+        '</div></td></tr>';
+    }).join('');
+  }
+
+  /* ===== ADMIN — PROFESSORES ===== */
+  function renderProfessores(){
+    var lista = carregarProfessores().sort(ordenarProfPorNome);
+    $('#contProf').textContent = lista.length;
+    $('#tabContProfs').textContent = lista.length;
+
+    var cont = $('#listaProfessores');
+    if(!lista.length){
+      cont.innerHTML = '<p class="vazio">Nenhum professor cadastrado ainda. Use o formulário ao lado.</p>';
+      return;
+    }
+    cont.innerHTML = lista.map(function(p){
+      var disp = (p.disciplinas && p.disciplinas.length) ? p.disciplinas.join(' · ') : 'Sem disciplinas definidas';
+      var obs  = p.obs ? '<span class="obs-prof">📝 '+esc(p.obs)+'</span>' : '';
+      return '<div class="prof-item">'+
+        '<div class="prof-item-info">'+
+          '<strong>'+esc(p.nome)+'</strong>'+
+          '<span class="cred">📧 '+esc(p.email||'—')+'</span>'+
+          '<span class="cred" style="background:#fef3c7;color:#b45309">🔑 '+esc(p.senha||'—')+'</span>'+
+          '<span class="disp">📚 '+esc(disp)+'</span>'+
+          obs+
+        '</div>'+
+        '<div class="prof-item-acoes">'+
+          '<button class="btn btn-ghost btn-sm" data-acao="editar-prof" data-id="'+p.id+'">✏️ Editar</button>'+
+          '<button class="btn btn-danger btn-sm" data-acao="excluir-prof" data-id="'+p.id+'">🗑 Excluir</button>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }
+  function salvarProfessor(e){
+    e.preventDefault();
+    var id = $('#profId').value;
+    var nome = $('#profNome').value.trim();
+    var email = $('#profEmail').value.trim();
+    var senha = $('#profSenha').value.trim();
+    var disciplinas = Array.from($('#profDisciplinas').selectedOptions).map(function(o){ return o.value; });
+    var obs = $('#profObs').value.trim();
+
+    if(!nome){ toast('Informe o nome do professor.','erro'); return; }
+    if(!email){ toast('Informe o @escola do professor.','erro'); return; }
+    if(!senha){ toast('Informe a senha pessoal do professor.','erro'); return; }
+    if(senha.length < 4){ toast('A senha pessoal precisa ter pelo menos 4 caracteres.','erro'); return; }
+
+    // Normaliza o @escola (remove @ do início, guarda sem @)
+    var emailLimpo = email.replace(/^@/,'').trim();
+
+    var profs = carregarProfessores();
+    var agora = new Date().toISOString();
+
+    // Verifica duplicidade de @escola
+    var duplicado = profs.find(function(p){
+      return p.id !== id && norm(p.email) === norm(emailLimpo);
+    });
+    if(duplicado){
+      toast('Já existe um professor com esse @escola.','erro');
+      return;
+    }
+
+    if(id){
+      var idx = profs.findIndex(function(p){ return p.id === id; });
+      if(idx > -1){
+        profs[idx] = Object.assign({}, profs[idx], {
+          nome:nome, email:emailLimpo, senha:senha, disciplinas:disciplinas, obs:obs, atualizadoEm:agora
+        });
+        toast('Professor atualizado!','sucesso');
+      }
+    } else {
+      profs.push({
+        id: uid(), nome:nome, email:emailLimpo, senha:senha,
+        disciplinas:disciplinas, obs:obs, criadoEm:agora, atualizadoEm:agora
+      });
+      toast('Professor cadastrado!','sucesso');
+    }
+    gravarProfessores(profs);
+    limparFormProf();
+    renderProfessores();
+  }
+  function limparFormProf(){
+    $('#profForm').reset();
+    $('#profId').value = '';
+    $('#profFormTitulo').textContent = '➕ Cadastrar novo professor';
+  }
+  function editarProfessor(id){
+    var p = carregarProfessores().find(function(x){ return x.id === id; });
+    if(!p){ toast('Professor não encontrado.','erro'); return; }
+    $('#profId').value = p.id;
+    $('#profNome').value = p.nome || '';
+    $('#profEmail').value = p.email || '';
+    $('#profSenha').value = p.senha || '';
+    $('#profObs').value = p.obs || '';
+    var sel = $('#profDisciplinas');
+    Array.from(sel.options).forEach(function(o){ o.selected = (p.disciplinas||[]).indexOf(o.value) > -1; });
+    $('#profFormTitulo').textContent = '✏️ Editando: ' + p.nome;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function excluirProfessor(id){
+    var p = carregarProfessores().find(function(x){ return x.id === id; });
+    if(!p){ toast('Professor não encontrado.','erro'); return; }
+    pedirConfirmacao('Excluir o professor "'+p.nome+'"? Fichas já salvas com esse nome não serão afetadas.', function(){
+      var restantes = carregarProfessores().filter(function(x){ return x.id !== id; });
+      gravarProfessores(restantes);
+      toast('Professor excluído.','info');
+      renderProfessores();
+    });
+  }
+
+  /* ===== FORMULÁRIO DO PROFESSOR ===== */
+  function coletar(){
+    return {
+      turno: $('#turno').value,
+      componente: $('#componente').value,
+      professor: $('#professor').value,
+      turma: $('#turma').value,
+      data: $('#dataFicha').value,
+      panoramaDesenvolvimento: $('#panoramaDesenvolvimento').value.trim(),
+      panoramaParticipacao: $('#panoramaParticipacao').value.trim(),
+      dificuldades: $('#dificuldades').value.trim(),
+      frequencia: $('#frequencia').value.trim(),
+      destaques: $('#destaques').value.trim(),
+      observacoes: $('#observacoes').value.trim()
+    };
+  }
+  function validar(d){
+    if(!d.turno) return 'Selecione o Turno.';
+    if(!d.turma) return 'Selecione a Turma.';
+    if(!d.professor) return 'Erro: professor não identificado. Faça login novamente.';
+    if(!d.componente) return 'Selecione o Componente Curricular.';
+    if(!d.data) return 'Informe a Data.';
+    return null;
+  }
+  function tratarEnvio(e){
+    e.preventDefault();
+    if(!professorLogado){ toast('Faça login novamente.','erro'); return; }
+    var dados = coletar();
+    var erro = validar(dados);
+    if(erro){ toast(erro,'erro'); return; }
+
+    var fichas = carregarFichas();
+    var idAtual = $('#fichaId').value;
+    var agora = new Date().toISOString();
+    var idx = idAtual ? fichas.findIndex(function(f){ return f.id === idAtual; }) : -1;
+    var idFinal, msg;
+
+    if(idx > -1){
+      fichas[idx] = Object.assign({}, fichas[idx], dados, { atualizadoEm: agora });
+      idFinal = fichas[idx].id; msg = 'Ficha atualizada!';
+    } else {
+      var nova = Object.assign({ id: uid(), criadoEm: agora, atualizadoEm: agora }, dados);
+      fichas.push(nova); idFinal = nova.id; msg = 'Ficha salva!';
+    }
+    if(!gravarFichas(fichas)) return;
+    $('#fichaId').value = idFinal;
+    $('#statusSalvo').textContent = '✔ Salvo às ' + new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    toast(msg,'sucesso');
+    renderMinhasFichas();
+  }
+  function limparFormulario(){
+    $('#fichaForm').reset();
+    $('#fichaId').value = '';
+    $('#dataFicha').value = hojeISO();
+    $('#statusSalvo').textContent = '';
+    if(professorLogado) $('#professor').value = professorLogado.nome;
+    atualizarTurmasPorTurno('', null);
+    trocarTurma('', null);
+  }
+  function novaFicha(){
+    limparFormulario();
+    toast('Formulário limpo.','info');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function carregarNoForm(id){
+    var f = carregarFichas().find(function(x){ return x.id === id; });
+    if(!f){ toast('Registro não encontrado.','erro'); return; }
+    // Só permite editar fichas do próprio professor
+    if(professorLogado && f.professor !== professorLogado.nome){
+      toast('Você só pode editar fichas criadas por você.','erro');
+      return;
+    }
+
+    $('#fichaId').value = f.id;
+    $('#turno').value = f.turno || '';
+    atualizarTurmasPorTurno(f.turno||'', f.turma||'');
+    $('#componente').value = f.componente || '';
+    $('#dataFicha').value = f.data || hojeISO();
+    trocarTurma(f.turma||'');
+    $('#professor').value = f.professor || (professorLogado ? professorLogado.nome : '');
+
+    $('#panoramaDesenvolvimento').value = f.panoramaDesenvolvimento||'';
+    $('#panoramaParticipacao').value = f.panoramaParticipacao||'';
+    $('#dificuldades').value = f.dificuldades||'';
+    $('#frequencia').value = f.frequencia||'';
+    $('#destaques').value = f.destaques||'';
+    $('#observacoes').value = f.observacoes||'';
+    $('#statusSalvo').textContent = 'Editando ficha de ' + dataHoraBR(f.atualizadoEm||f.criadoEm);
+    toast('Ficha carregada para edição.','info');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  /* ===== LISTA DE ALUNOS (referência) ===== */
+  function trocarTurma(turma){
+    var nomes = ALUNOS_POR_TURMA[turma] || [];
+    var lista = $('#alunosLista');
+    var aviso = $('#alunosAviso');
+    $('#alunosCont').textContent = nomes.length + ' aluno' + (nomes.length===1?'':'s');
+    $('#alunosSubtitulo').textContent = turma
+      ? (nomes.length + ' aluno(s) na turma ' + turma)
+      : 'Selecione o turno e a turma para visualizar os alunos';
+
+    if(!nomes.length){
+      lista.classList.add('hidden');
+      aviso.classList.remove('hidden');
+      aviso.innerHTML = turma
+        ? 'Nenhum aluno cadastrado para esta turma. Edite a lista no código.'
+        : 'Selecione o <strong>turno</strong> e a <strong>turma</strong> acima para carregar os alunos.';
+      return;
+    }
+    aviso.classList.add('hidden');
+    lista.classList.remove('hidden');
+    lista.innerHTML = nomes.map(function(nome, i){
+      return '<span class="aluno-chip"><span class="num">'+(i+1)+'</span>'+esc(nome)+'</span>';
+    }).join('');
+  }
+
+  /* ===== LISTA DE FICHAS DO PROFESSOR ===== */
+  function renderMinhasFichas(){
+    if(!professorLogado){ $('#listaMinhasFichas').innerHTML=''; return; }
+    var todas = carregarFichas();
+    var minhas = todas.filter(function(f){ return f.professor === professorLogado.nome; }).sort(ordenarPorAtualizacao);
+    var c = $('#listaMinhasFichas');
+    $('#contadorFichas').textContent = minhas.length;
+    if(!minhas.length){ c.innerHTML = '<p class="vazio">Você ainda não salvou nenhuma ficha.</p>'; return; }
+    c.innerHTML = minhas.map(function(f){
+      var badgeTurno = f.turno ? '<span class="badge badge-turno">'+iconeTurno(f.turno)+' '+esc(f.turno)+'</span>' : '';
+      return '<div class="ficha-item">'+
+        '<div>'+badgeTurno+'<strong>'+esc(f.turma||'—')+'</strong>'+
+        '<span class="badge">'+esc(f.componente||'—')+'</span>'+
+        '<p>'+dataBR(f.data)+' · salva em '+dataHoraBR(f.atualizadoEm||f.criadoEm)+'</p></div>'+
+        '<div class="ficha-item-acoes">'+
+          '<button class="btn btn-ghost btn-sm" data-acao="ver" data-id="'+f.id+'">👁 Ver</button>'+
+          '<button class="btn btn-primary btn-sm" data-acao="editar" data-id="'+f.id+'">✏️ Abrir</button>'+
+          '<button class="btn btn-danger btn-sm" data-acao="excluir" data-id="'+f.id+'">🗑 Excluir</button>'+
+        '</div></div>';
+    }).join('');
+  }
+
+  /* ===== DOCUMENTO ===== */
+  function resposta(t){ var x=(t||'').trim(); return x ? '<p class="resposta">'+esc(x)+'</p>' : '<p class="resposta vazia">Não informado.</p>'; }
+  function listaAlunosDocHTML(turma){
+    var nomes = ALUNOS_POR_TURMA[turma] || [];
+    if(!nomes.length) return '<p class="resposta vazia">Nenhum aluno cadastrado para esta turma.</p>';
+    return '<div class="doc-lista-alunos">'+
+      nomes.map(function(n){ return '<span class="chip">'+esc(n)+'</span>'; }).join('')+
+    '</div>';
+  }
+  function documentoHTML(f){
+    return '<div class="doc">'+
+      '<div class="doc-head"><h3>ECLA ESTADUAL DO CAMPO FREI GRACIANO DROESSLER</h3>'+
+      '<p>Ensino Fundamental em Tempo Integral</p>'+
+      '<h4>FICHA INDIVIDUAL — PRÉ-CONSELHO DE CLASSE</h4></div>'+
+      '<div class="doc-ident">'+
+        '<div><span>Turno</span><strong>'+esc(f.turno||'—')+'</strong></div>'+
+        '<div><span>Turma</span><strong>'+esc(f.turma||'—')+'</strong></div>'+
+        '<div><span>Componente</span><strong>'+esc(f.componente||'—')+'</strong></div>'+
+        '<div><span>Professor(a)</span><strong>'+esc(f.professor||'—')+'</strong></div>'+
+        '<div><span>Data</span><strong>'+dataBR(f.data)+'</strong></div></div>'+
+      '<section class="doc-secao"><h5>Alunos da Turma</h5>'+ listaAlunosDocHTML(f.turma) +'</section>'+
+      '<section class="doc-secao"><h5>1. Panorama da Turma</h5>'+
+        '<div class="doc-questao"><p class="rotulo">Desenvolvimento geral da turma:</p>'+resposta(f.panoramaDesenvolvimento)+'</div>'+
+        '<div class="doc-questao"><p class="rotulo">Participação e postura:</p>'+resposta(f.panoramaParticipacao)+'</div></section>'+
+      '<section class="doc-secao"><h5>2. Aprendizagem e Frequência</h5>'+
+        '<div class="doc-questao"><p class="rotulo">Maiores dificuldades:</p>'+resposta(f.dificuldades)+'</div>'+
+        '<div class="doc-questao"><p class="rotulo">Baixa frequência / acompanhamento:</p>'+resposta(f.frequencia)+'</div></section>'+
+      '<section class="doc-secao"><h5>3. Destaques e Atenção</h5>'+
+        '<div class="doc-questao"><p class="rotulo">Destaques positivos:</p>'+resposta(f.destaques)+'</div>'+
+        '<div class="doc-questao"><p class="rotulo">Observações gerais:</p>'+resposta(f.observacoes)+'</div></section>'+
+      '<div class="doc-rodape"><div><span>Registrado em</span><strong>'+dataHoraBR(f.criadoEm)+'</strong></div>'+
+      '<div><span>Atualizado em</span><strong>'+dataHoraBR(f.atualizadoEm||f.criadoEm)+'</strong></div>'+
+      '<div class="assinatura">Assinatura do(a) Professor(a)</div></div></div>';
+  }
+
+  /* ===== MODAL ===== */
+  function abrirModal(id){
+    var f = carregarFichas().find(function(x){ return x.id === id; });
+    if(!f){ toast('Registro não encontrado.','erro'); return; }
+    fichaNoModal = f;
+    $('#modalBody').innerHTML = documentoHTML(f);
+    $('#modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function fecharModal(){
+    $('#modal').classList.add('hidden');
+    $('#modalBody').innerHTML = '';
+    fichaNoModal = null;
+    document.body.style.overflow = '';
+  }
+  function imprimirFicha(id){
+    var f = carregarFichas().find(function(x){ return x.id === id; });
+    if(!f){ toast('Registro não encontrado.','erro'); return; }
+    $('#printArea').innerHTML = documentoHTML(f);
+    setTimeout(function(){ window.print(); }, 120);
+  }
+
+  /* ===== CONFIRMAÇÃO ===== */
+  function pedirConfirmacao(msg, cb, titulo, botao){
+    $('#confirmTitulo').textContent = titulo || 'Confirmar';
+    $('#confirmTexto').textContent = msg;
+    $('#btnConfirmarExclusao').textContent = botao || 'Sim, confirmar';
+    callbackConfirmacao = cb;
+    $('#confirmModal').classList.remove('hidden');
+  }
+  function fecharConfirmacao(){
+    $('#confirmModal').classList.add('hidden');
+    $('#confirmTexto').textContent = '';
+    callbackConfirmacao = null;
+  }
+  function excluirFicha(id){
+    var f = carregarFichas().find(function(x){ return x.id === id; });
+    if(!f){ toast('Registro não encontrado.','erro'); return; }
+    // Professor só pode excluir fichas próprias
+    if(usuarioAtual === 'professor' && professorLogado && f.professor !== professorLogado.nome){
+      toast('Você só pode excluir fichas criadas por você.','erro');
+      return;
+    }
+    var desc = (f.turno? f.turno+' · ':'') + (f.turma||'—') + ' — ' + (f.componente||'—') + ' (' + dataBR(f.data) + ')';
+    pedirConfirmacao('Excluir definitivamente a ficha: '+desc+'?', function(){
+      var restantes = carregarFichas().filter(function(x){ return x.id !== id; });
+      if(!gravarFichas(restantes)) return;
+      if(fichaNoModal && fichaNoModal.id === id) fecharModal();
+      if($('#fichaId').value === id) limparFormulario();
+      toast('Registro excluído.','info');
+      if(usuarioAtual === 'admin') renderAdmin();
+      if(usuarioAtual === 'professor') renderMinhasFichas();
+    }, 'Excluir ficha', 'Sim, excluir');
+  }
+
+  /* ===== EVENTOS ===== */
+  function cliqueLista(e){
+    var b = e.target.closest('button[data-acao]'); if(!b) return;
+    var id = b.getAttribute('data-id'), acao = b.getAttribute('data-acao');
+    if(acao==='ver') abrirModal(id);
+    if(acao==='editar') carregarNoForm(id);
+    if(acao==='excluir') excluirFicha(id);
+  }
+  function cliqueTabela(e){
+    var b = e.target.closest('button[data-acao]'); if(!b) return;
+    var id = b.getAttribute('data-id'), acao = b.getAttribute('data-acao');
+    if(acao==='ver') abrirModal(id);
+    if(acao==='imprimir') imprimirFicha(id);
+    if(acao==='excluir') excluirFicha(id);
+  }
+  function cliqueListaProfessores(e){
+    var b = e.target.closest('button[data-acao]'); if(!b) return;
+    var id = b.getAttribute('data-id'), acao = b.getAttribute('data-acao');
+    if(acao==='editar-prof') editarProfessor(id);
+    if(acao==='excluir-prof') excluirProfessor(id);
+  }
+
+  /* Atualiza rótulo do campo de login conforme perfil */
+  function atualizarRotuloLogin(){
+    var perfil = ($('input[name="perfil"]:checked')||{}).value || 'professor';
+    var rotulo = $('#rotuloLogin');
+    var input = $('#senha');
+    var info = $('#loginInfo');
+    if(perfil === 'admin'){
+      rotulo.textContent = 'SENHA DO ADMINISTRADOR';
+      input.type = 'password';
+      input.placeholder = 'Digite a senha do diretor';
+      info.innerHTML = 'Acesso restrito ao diretor(a) da escola.';
+    } else {
+      rotulo.textContent = 'SEU @ESCOLA OU SENHA PESSOAL';
+      input.type = 'text';
+      input.placeholder = 'Ex.: maria.silva@escola  ou  senha123';
+      info.innerHTML = 'Professores: use o <strong>@escola</strong> ou a <strong>senha pessoal</strong> cadastrada pelo diretor.';
+    }
+  }
+
+  function init(){
+    preencherSelect($('#componente'), COMPONENTES, 'Selecione o componente...');
+    preencherSelectDisciplinas();
+    $('#dataFicha').value = hojeISO();
+    atualizarTurmasPorTurno('', null);
+    trocarTurma('');
+    atualizarRotuloLogin();
+
+    /* Login/Logout */
+    $('#loginForm').addEventListener('submit', tratarLogin);
+    $('#btnSair').addEventListener('click', sair);
+
+    /* Trocar rótulo do login ao alternar perfil */
+    $$('input[name="perfil"]').forEach(function(r){
+      r.addEventListener('change', function(){
+        atualizarRotuloLogin();
+        $('#loginErro').classList.add('hidden');
+      });
+    });
+
+    /* Formulário do professor */
+    $('#fichaForm').addEventListener('submit', tratarEnvio);
+    $('#btnNovaFicha').addEventListener('click', novaFicha);
+    $('#listaMinhasFichas').addEventListener('click', cliqueLista);
+
+    /* Turno / Turma */
+    $('#turno').addEventListener('change', function(){
+      atualizarTurmasPorTurno($('#turno').value, null);
+      trocarTurma('');
+    });
+    $('#turma').addEventListener('change', function(){
+      trocarTurma($('#turma').value);
+    });
+
+    /* Admin — abas */
+    $$('.admin-tab').forEach(function(b){
+      b.addEventListener('click', function(){ trocarAbaAdmin(b.dataset.tab); });
+    });
+
+    /* Admin — filtros */
+    $('#buscaTurma').addEventListener('input', function(){ aplicarFiltrosAdmin(carregarFichas().slice().sort(ordenarPorAtualizacao)); });
+    $('#buscaProfessor').addEventListener('input', function(){ aplicarFiltrosAdmin(carregarFichas().slice().sort(ordenarPorAtualizacao)); });
+    $('#filtroTurno').addEventListener('change', function(){ aplicarFiltrosAdmin(carregarFichas().slice().sort(ordenarPorAtualizacao)); });
+    $('#filtroComponente').addEventListener('change', function(){ aplicarFiltrosAdmin(carregarFichas().slice().sort(ordenarPorAtualizacao)); });
+
+    $('#btnLimparFiltros').addEventListener('click', function(){
+      $('#buscaTurma').value = '';
+      $('#buscaProfessor').value = '';
+      $('#filtroTurno').value = '';
+      $('#filtroComponente').value = '';
+      aplicarFiltrosAdmin(carregarFichas().slice().sort(ordenarPorAtualizacao));
+      toast('Filtros limpos.','info');
+    });
+
+    $('#corpoTabela').addEventListener('click', cliqueTabela);
+
+    /* Admin — professores */
+    $('#profForm').addEventListener('submit', salvarProfessor);
+    $('#btnCancelarProf').addEventListener('click', limparFormProf);
+    $('#listaProfessores').addEventListener('click', cliqueListaProfessores);
+
+    /* Modal ficha */
+    $('#btnFecharModal').addEventListener('click', fecharModal);
+    $('#btnFecharModalX').addEventListener('click', fecharModal);
+    $('#btnImprimirModal').addEventListener('click', function(){ if(fichaNoModal) imprimirFicha(fichaNoModal.id); });
+    $('#btnExcluirModal').addEventListener('click', function(){ if(fichaNoModal) excluirFicha(fichaNoModal.id); });
+    $('#modal').addEventListener('click', function(e){ if(e.target === $('#modal')) fecharModal(); });
+
+    /* Modal confirmação */
+    $('#btnCancelarExclusao').addEventListener('click', fecharConfirmacao);
+    $('#btnFecharConfirmX').addEventListener('click', fecharConfirmacao);
+    $('#btnConfirmarExclusao').addEventListener('click', function(){
+      var cb = callbackConfirmacao; fecharConfirmacao();
+      if(typeof cb === 'function') cb();
+    });
+    $('#confirmModal').addEventListener('click', function(e){ if(e.target === $('#confirmModal')) fecharConfirmacao(); });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key !== 'Escape') return;
+      if(!$('#confirmModal').classList.contains('hidden')) fecharConfirmacao();
+      else if(!$('#modal').classList.contains('hidden')) fecharModal();
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
