@@ -18,7 +18,6 @@ body{margin:0;min-height:100vh;font-family:'Segoe UI',Roboto,'Helvetica Neue',Ar
 h1,h2,h3,h4,h5,p{margin:0}
 button{font-family:inherit}
 .hidden{display:none !important}
-
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-size:.8125rem;padding:9px 16px;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;letter-spacing:.01em;background:var(--white);color:var(--slate-700);border-color:var(--border);transition:background-color .12s ease,border-color .12s ease}
 .btn:hover{background:var(--slate-100)}
 .btn:disabled{opacity:.55;cursor:not-allowed}
@@ -33,7 +32,6 @@ button{font-family:inherit}
 .btn-block{width:100%}
 .btn-sm{padding:5px 10px;font-size:.75rem;border-radius:var(--radius-sm)}
 .btn-lg{padding:12px 24px;font-size:.875rem}
-
 .campo{display:flex;flex-direction:column;gap:5px;font-size:.75rem;font-weight:600;color:var(--slate-700);letter-spacing:.02em;text-transform:uppercase}
 .campo input,.campo select,.campo textarea{font:inherit;font-weight:400;font-size:.875rem;color:var(--slate-900);padding:9px 11px;width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--white);text-transform:none;letter-spacing:0;transition:border-color .12s ease}
 .campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,77,140,.08)}
@@ -41,6 +39,30 @@ button{font-family:inherit}
 .campo small{font-size:.6875rem;font-weight:400;color:var(--slate-500);text-transform:none;letter-spacing:0;margin-top:3px}
 textarea{resize:vertical;min-height:84px;line-height:1.55;font-size:.875rem}
 select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%2364748b' d='M5 6 0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+select[multiple]{background-image:none;padding-right:11px}
+
+/* Checkboxes de disciplinas */
+.disciplinas-check-wrap{
+  display:flex;gap:6px;flex-wrap:wrap;
+  padding:10px;background:var(--white);
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+  min-height:44px;align-items:center;
+  text-transform:none;letter-spacing:0;
+}
+.disc-check{position:relative;cursor:pointer;display:inline-block}
+.disc-check input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+.disc-check span{
+  display:inline-block;padding:6px 14px;
+  border:1.5px solid var(--border);border-radius:999px;
+  background:var(--white);font-size:.8125rem;font-weight:600;
+  color:var(--slate-700);transition:all .12s;user-select:none;
+}
+.disc-check:hover span{border-color:var(--blue);color:var(--blue)}
+.disc-check input:checked + span{
+  border-color:var(--blue);background:#f0f5fb;color:var(--blue);
+  box-shadow:0 0 0 2px rgba(30,77,140,.1);
+}
+.disc-check input:focus-visible + span{outline:2px solid var(--blue);outline-offset:2px}
 
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--navy)}
 .login-card{width:100%;max-width:440px;background:var(--white);border-radius:var(--radius);padding:36px 34px 30px;box-shadow:0 8px 24px rgba(15,23,42,.18)}
@@ -60,46 +82,40 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;c
 .profile-option input:checked + .profile-content{border-color:var(--blue);background:#f0f5fb;box-shadow:0 0 0 1px var(--blue) inset}
 .login-erro{margin-top:14px;font-size:.8125rem;font-weight:500;color:var(--red);background:var(--red-light);border:1px solid #f0b7b7;border-radius:var(--radius-sm);padding:10px 12px}
 .login-info{margin-top:14px;font-size:.75rem;color:var(--slate-500);text-align:center;line-height:1.5}
-
 .topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:10px 24px;background:var(--navy);color:#fff;border-bottom:1px solid var(--navy-700)}
 .topbar-left{display:flex;align-items:center;gap:12px}
 .topbar-left strong{display:block;font-size:.8125rem;font-weight:600;letter-spacing:.01em}
 .topbar-left small{display:block;font-size:.6875rem;color:#93aac3;text-transform:uppercase;letter-spacing:.1em}
 .topbar-right{display:flex;align-items:center;gap:12px}
 .user-chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:6px 12px;border-radius:var(--radius-sm);font-size:.75rem;font-weight:500}
+.user-chip .badge-pend{display:inline-block;margin-left:6px;background:var(--red);color:#fff;font-size:.625rem;font-weight:800;padding:1px 6px;border-radius:10px;letter-spacing:.03em}
 .topbar .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.28);padding:7px 14px;font-size:.75rem}
 .topbar .btn-outline:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
-
 .container{max-width:1280px;margin:0 auto;padding:24px 20px 60px}
 .page-intro{margin-bottom:22px}
 .page-intro h2{font-size:1.125rem;color:var(--navy);font-weight:700;letter-spacing:.01em}
 .page-intro p{font-size:.8125rem;color:var(--slate-500);margin-top:4px}
 .card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:24px;box-shadow:var(--shadow)}
-
 .admin-tabs{display:flex;gap:0;border-bottom:1px solid var(--slate-300);margin-bottom:22px;flex-wrap:wrap}
 .admin-tab{background:transparent;border:none;padding:11px 18px;font-size:.8125rem;font-weight:600;color:var(--slate-500);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:inline-flex;align-items:center;gap:8px}
 .admin-tab:hover{color:var(--slate-900)}
 .admin-tab.ativo{color:var(--blue);border-bottom-color:var(--blue)}
 .admin-tab .cont{background:var(--slate-100);color:var(--slate-700);font-size:.6875rem;font-weight:700;padding:1px 7px;border-radius:10px;min-width:20px;text-align:center}
 .admin-tab.ativo .cont{background:#e0eaf5;color:var(--blue)}
-
 .doc-cabecalho{text-align:center;padding-bottom:18px;margin-bottom:24px;border-bottom:2px solid var(--navy)}
 .doc-cabecalho h3{font-size:.9375rem;color:var(--navy);font-weight:700;letter-spacing:.01em}
 .doc-cabecalho p{font-size:.6875rem;text-transform:uppercase;letter-spacing:.14em;color:var(--slate-500);margin:5px 0 12px;font-weight:600}
 .doc-cabecalho h4{display:inline-block;font-size:.75rem;letter-spacing:.06em;color:var(--navy);font-weight:700;padding:6px 14px;border:1px solid var(--navy);border-radius:3px;text-transform:uppercase}
 .grid-ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px}
-
+.grid-ident .full{grid-column:1 / -1}
 .secao{border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin:0 0 18px;background:var(--white)}
 .secao-titulo{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--slate-200);flex-wrap:wrap}
 .secao-titulo h3{font-size:.875rem;color:var(--navy);font-weight:700;letter-spacing:.01em}
 .badge-status{font-size:.6875rem;font-weight:700;letter-spacing:.04em;padding:3px 10px;border-radius:3px;background:var(--slate-100);color:var(--slate-700);text-transform:uppercase}
 .badge-status.ok{background:var(--green-light);color:var(--green);border:1px solid #b8e0c4}
-.badge-status.lock{background:var(--amber-light);color:var(--amber);border:1px solid #f0d69b}
-
 .pergunta-card{border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:12px;background:var(--white)}
 .pergunta-card .rotulo-pergunta{font-size:.875rem;font-weight:600;color:var(--slate-900);margin-bottom:12px;display:flex;gap:10px;align-items:flex-start;line-height:1.5}
 .pergunta-card .rotulo-pergunta .num{background:var(--navy);color:#fff;font-size:.6875rem;font-weight:700;min-width:20px;height:20px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-
 .escala-opcoes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px}
 .escala-opt{position:relative;cursor:pointer}
 .escala-opt input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
@@ -109,18 +125,20 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;c
 .escala-opt[data-nivel="2"] input:checked + span{border-color:var(--amber);background:var(--amber-light);color:var(--amber)}
 .escala-opt[data-nivel="3"] input:checked + span{border-color:var(--blue);background:#f0f5fb;color:var(--blue)}
 .escala-opt[data-nivel="4"] input:checked + span{border-color:var(--green);background:var(--green-light);color:var(--green)}
-
 .bloqueada{position:relative;opacity:.55}
 .bloqueada > .conteudo{filter:blur(1.5px);pointer-events:none;user-select:none}
 .bloqueada::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.5);border-radius:var(--radius);z-index:1}
 .bloqueada .lock-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--slate-900);color:#fff;padding:10px 18px;border-radius:var(--radius-sm);font-weight:600;font-size:.75rem;z-index:2;letter-spacing:.02em}
-
 .aviso-grande{padding:28px 24px;text-align:center;border-radius:var(--radius);margin-bottom:20px;border:1px solid}
 .aviso-grande h3{font-size:.9375rem;margin-bottom:8px;font-weight:700}
 .aviso-grande p{font-size:.8125rem;max-width:540px;margin:0 auto;line-height:1.55}
 .aviso-grande.amarelo{background:var(--amber-light);color:var(--amber);border-color:#f0d69b}
 .aviso-grande.verde{background:var(--green-light);color:var(--green);border-color:#b8e0c4}
-
+.aviso-cobranca{display:flex;flex-direction:column;gap:8px;padding:16px 20px;background:#fff5f5;border:1px solid #f0b7b7;border-left:4px solid var(--red);border-radius:var(--radius);margin-bottom:20px}
+.aviso-cobranca strong{font-size:.9375rem;color:var(--red);font-weight:700}
+.aviso-cobranca p{font-size:.8125rem;color:var(--slate-700);line-height:1.5}
+.aviso-cobranca .pendencias-list{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.aviso-cobranca .pend-tag{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid #f0b7b7;color:var(--red);padding:4px 11px;border-radius:3px;font-size:.75rem;font-weight:600}
 .bar-item{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--slate-200)}
 .bar-item:last-child{border-bottom:none}
 .bar-item .bar-top{display:flex;justify-content:space-between;align-items:center;font-size:.8125rem;font-weight:600;color:var(--slate-700);margin-bottom:8px;gap:12px}
@@ -133,7 +151,6 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;c
 .bar-fill.n4{background:var(--green)}
 .bar-resumo{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;font-size:.6875rem;color:var(--slate-500)}
 .bar-resumo .r{background:var(--slate-50);padding:2px 8px;border-radius:3px;font-weight:600;border:1px solid var(--slate-200)}
-
 .alunos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
 .aluno-check{position:relative;cursor:pointer;display:block}
 .aluno-check input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
@@ -141,16 +158,13 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;c
 .aluno-check .box .chk{width:15px;height:15px;border-radius:2px;border:1.5px solid var(--slate-400);background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.6rem;color:transparent}
 .aluno-check input:checked + .box{border-color:var(--green);background:var(--green-light);color:var(--green)}
 .aluno-check input:checked + .box .chk{background:var(--green);border-color:var(--green);color:#fff}
-
 .aluno-check.atencao input:checked + .box{border-color:var(--red);background:var(--red-light);color:var(--red)}
 .aluno-check.atencao input:checked + .box .chk{background:var(--red);border-color:var(--red);color:#fff}
-
 .pergunta-admin-item{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 15px;border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:var(--radius-sm);background:var(--white);margin-bottom:8px;flex-wrap:wrap}
 .pergunta-admin-item .info{flex:1;min-width:220px}
 .pergunta-admin-item .tipo-badge{display:inline-block;font-size:.625rem;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:6px;letter-spacing:.05em;text-transform:uppercase;background:#e0eaf5;color:var(--blue)}
 .pergunta-admin-item .texto{font-size:.875rem;color:var(--slate-900);font-weight:500;line-height:1.5}
 .pergunta-admin-item .acoes{display:flex;gap:6px}
-
 .tabela-wrap{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);overflow-x:auto;box-shadow:var(--shadow)}
 table.tabela-admin{width:100%;border-collapse:collapse;min-width:1000px}
 table.tabela-admin thead th{background:var(--slate-50);text-align:left;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-500);padding:11px 14px;border-bottom:1px solid var(--slate-200)}
@@ -161,17 +175,14 @@ table.tabela-admin tbody tr.linha-erro{background:#fef7f7}
 td .acoes{display:flex;gap:6px;flex-wrap:wrap}
 .text-muted{color:var(--slate-500);font-size:.75rem}
 .tabela-vazia{text-align:center;color:var(--slate-500);font-style:italic;padding:32px 14px !important}
-
 .badge{display:inline-block;padding:2px 9px;border-radius:3px;font-size:.6875rem;font-weight:600;background:var(--slate-100);color:var(--slate-700);border:1px solid var(--slate-200)}
 .badge-turno{background:#f0f5fb;color:var(--blue);border-color:#b8cee0}
+.badge-disciplina{background:#fffbeb;color:var(--amber);border-color:#f0d69b}
 .badge-verde{background:var(--green-light);color:var(--green);border-color:#b8e0c4}
 .badge-vermelho{background:var(--red-light);color:var(--red);border-color:#f0b7b7}
-
 .filtros{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;align-items:end}
-
 .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media (max-width:800px){ .form-grid-2{grid-template-columns:1fr} }
-
 .item-card{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 15px;border:1px solid var(--border);border-left:3px solid var(--green);border-radius:var(--radius-sm);background:var(--white);margin-bottom:8px;flex-wrap:wrap}
 .item-card.turma{border-left-color:var(--blue)}
 .item-card .info{flex:1;min-width:200px}
@@ -181,16 +192,24 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
 .item-card .info .tag.verde{background:var(--green-light);color:var(--green);border-color:#b8e0c4}
 .item-card .info .tag.vermelho{background:var(--red-light);color:var(--red);border-color:#f0b7b7}
 .item-card .info .tag.amarelo{background:var(--amber-light);color:var(--amber);border-color:#f0d69b}
-.item-card .info .small-info{display:block;font-size:.75rem;color:var(--slate-500);margin-top:5px}
+.item-card .info .small-info{display:block;font-size:.75rem;color:var(--slate-500);margin-top:5px;line-height:1.6}
 .item-card .acoes{display:flex;gap:6px;flex-wrap:wrap}
-
+.vinculo-turno-titulo{font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--slate-500);margin:10px 0 6px;padding-bottom:4px;border-bottom:1px dashed var(--slate-300)}
+.vinculo-turno-titulo:first-child{margin-top:0}
+.vinculo-item{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px;background:var(--slate-50);transition:border-color .12s,background-color .12s}
+.vinculo-item.ativo{border-color:var(--blue);background:#f0f5fb}
+.vinculo-check{display:flex;gap:8px;align-items:center;cursor:pointer;min-width:150px;font-weight:600;font-size:.8125rem;color:var(--slate-700)}
+.vinculo-check input{width:auto;padding:0;margin:0}
+.vinculo-check span{line-height:1.3}
+.vinculo-disciplinas{flex:1}
+.vinculo-disciplinas select{min-height:auto;font-size:.8125rem;padding:4px}
+.vinculo-disciplinas small{display:block;font-size:.6875rem;color:var(--slate-500);margin-bottom:4px;text-transform:none;letter-spacing:0}
 .publicacao-box{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .publicacao-box .status{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .publicacao-box .dot{width:10px;height:10px;border-radius:50%;background:var(--red)}
 .publicacao-box .dot.on{background:var(--green)}
 .publicacao-box h3{font-size:1rem;color:var(--navy);font-weight:700}
 .publicacao-box p{font-size:.8125rem;color:var(--slate-500);max-width:560px;line-height:1.55}
-
 .modal-overlay{position:fixed;inset:0;z-index:60;padding:20px;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.6)}
 .modal{background:var(--white);border-radius:var(--radius);width:100%;max-width:920px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 12px 32px rgba(15,23,42,.28)}
 .modal-sm{max-width:440px}
@@ -202,7 +221,6 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
 .modal-body{padding:24px;overflow-y:auto}
 .modal-body > p{font-size:.875rem;color:var(--slate-700)}
 .modal-foot{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;padding:14px 22px;border-top:1px solid var(--slate-200);background:var(--slate-50);border-radius:0 0 var(--radius) var(--radius)}
-
 .doc-head{text-align:center;padding-bottom:14px;margin-bottom:20px;border-bottom:2px solid var(--navy)}
 .doc-head h3{font-size:.9375rem;color:var(--navy);font-weight:700}
 .doc-head p{font-size:.6875rem;text-transform:uppercase;color:var(--slate-500);margin:5px 0 10px;letter-spacing:.12em;font-weight:600}
@@ -224,13 +242,11 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
 .doc-rodape span{display:block;font-size:.625rem;text-transform:uppercase;color:var(--slate-500);font-weight:700;letter-spacing:.06em}
 .doc-rodape strong{font-size:.75rem;color:var(--slate-900);font-weight:600}
 .assinatura{border-top:1px solid var(--slate-700);padding-top:6px;min-width:220px;font-size:.75rem;color:var(--slate-700);text-align:center}
-
 .toast-container{position:fixed;right:20px;bottom:20px;z-index:120;display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:var(--radius-sm);padding:11px 16px;min-width:260px;max-width:380px;font-size:.8125rem;font-weight:500;color:var(--slate-900);box-shadow:0 4px 12px rgba(15,23,42,.1)}
 .toast.sucesso{border-left-color:var(--green)}
 .toast.erro{border-left-color:var(--red)}
 .toast.info{border-left-color:var(--amber)}
-
 #printArea{display:none}
 @media print{
   @page{margin:12mm 10mm;size:A4}
@@ -239,7 +255,6 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
   #printArea{display:block !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .doc-secao{break-inside:avoid}
 }
-
 @media (max-width:700px){
   .login-card{padding:28px 20px}
   .profile-options{grid-template-columns:1fr}
@@ -249,6 +264,8 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
   .topbar-left small{display:none}
   .modal-foot .btn{flex:1 1 auto}
   .escala-opcoes{grid-template-columns:1fr 1fr}
+  .vinculo-item{flex-direction:column;gap:8px}
+  .vinculo-check{min-width:auto}
 }
 </style>
 </head>
@@ -319,8 +336,10 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     <div class="container">
       <div class="page-intro">
         <h2>Pré-Conselho</h2>
-        <p>Selecione o turno e a turma. Marque as opções e escolha os alunos destaque e os que precisam de atenção.</p>
+        <p>Escolha o turno, a turma e marque as disciplinas que está avaliando. Um único questionário vale para todas.</p>
       </div>
+
+      <div id="avisoCobranca" class="aviso-cobranca hidden"></div>
 
       <div id="avisoNaoPublicado" class="aviso-grande amarelo hidden">
         <h3>Aguardando liberação do diretor</h3>
@@ -355,17 +374,25 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
             </label>
 
             <label class="campo"><span>Data</span><input type="date" id="dataFicha" required></label>
+
+            <div class="campo full">
+              <span>Disciplinas que está avaliando nesta turma</span>
+              <div id="disciplinasCheckboxes" class="disciplinas-check-wrap">
+                <span style="font-size:.75rem;color:var(--slate-500);text-transform:none;letter-spacing:0">Selecione a turma primeiro</span>
+              </div>
+              <small>Marque uma ou mais disciplinas. O questionário é único e vale para todas as marcadas.</small>
+            </div>
           </div>
 
           <div style="padding:12px 16px;background:var(--slate-50);border-radius:var(--radius-sm);border:1px solid var(--slate-200)">
-            <strong style="font-size:.6875rem;color:var(--slate-500);display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Disciplinas que leciona nesta turma</strong>
+            <strong style="font-size:.6875rem;color:var(--slate-500);display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Suas disciplinas nesta turma</strong>
             <div id="minhasDisciplinas" style="display:flex;gap:6px;flex-wrap:wrap"></div>
           </div>
         </div>
 
         <div id="avisoJaRespondeu" class="aviso-grande verde hidden">
           <h3>Questionário já respondido</h3>
-          <p>Este professor já respondeu o questionário desta turma. Você pode visualizar ou editar as respostas abaixo.</p>
+          <p>Você já respondeu o questionário desta turma. Pode visualizar ou editar as respostas abaixo.</p>
         </div>
 
         <section class="secao hidden" id="secaoPerguntas">
@@ -423,7 +450,7 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
               <span class="badge-status" id="infoAtencao">0 selecionados</span>
             </div>
             <p style="font-size:.8125rem;color:var(--slate-500);margin-bottom:14px">
-              Selecione os alunos que necessitam de maior acompanhamento — dificuldade de aprendizagem, baixa frequência, indisciplina ou falta de envolvimento.
+              Selecione os alunos que necessitam de maior acompanhamento.
             </p>
             <div id="atencaoConteudo" class="alunos-grid"></div>
           </div>
@@ -453,7 +480,7 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     <div class="container">
       <div class="page-intro">
         <h2>Painel do Administrador</h2>
-        <p>Gerencie perguntas, professores, turmas, alunos e relatórios.</p>
+        <p>Gerencie perguntas, professores, turmas e relatórios.</p>
       </div>
 
       <div class="admin-tabs">
@@ -480,7 +507,7 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
         <div class="tabela-wrap">
           <table class="tabela-admin">
             <thead>
-              <tr><th>Data</th><th>Turno</th><th>Turma</th><th>Professor(a)</th><th>Disciplinas</th><th>Salvo em</th><th>Ações</th></tr>
+              <tr><th>Data</th><th>Turno</th><th>Turma</th><th>Disciplinas Avaliadas</th><th>Professor(a)</th><th>Salvo em</th><th>Ações</th></tr>
             </thead>
             <tbody id="corpoTabela"></tbody>
           </table>
@@ -522,7 +549,13 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
               <label class="campo" style="margin-bottom:12px"><span>Nome completo</span><input type="text" id="profNome" required></label>
               <label class="campo" style="margin-bottom:12px"><span>@escola</span><input type="text" id="profEmail" placeholder="maria.silva" required><small>Sem o @escola</small></label>
               <label class="campo" style="margin-bottom:12px"><span>Senha pessoal</span><input type="text" id="profSenha" required></label>
-              <label class="campo" style="margin-bottom:12px"><span>Disciplinas</span><select id="profDisciplinas" multiple size="6"></select><small>Segure Ctrl para selecionar várias</small></label>
+
+              <label class="campo" style="margin-bottom:12px">
+                <span>Vínculos — turmas que leciona</span>
+                <div id="vinculosContainer" style="border:1px solid var(--border);border-radius:6px;padding:10px;max-height:400px;overflow-y:auto;background:var(--white);text-transform:none;letter-spacing:0"></div>
+                <small>Marque cada turma e escolha até 5 disciplinas nela</small>
+              </label>
+
               <label class="campo" style="margin-bottom:16px"><span>Observações</span><input type="text" id="profObs"></label>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <button type="submit" class="btn btn-primary">Salvar</button>
@@ -641,12 +674,13 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
 (function(){
   'use strict';
 
-  var K_FICHAS     = 'pc_fichas_v10';
-  var K_PROFS      = 'pc_profs_v7';
-  var K_PERGUNTAS  = 'pc_perguntas_v5';
-  var K_TURMAS     = 'pc_turmas_v5';
-  var K_SETTINGS   = 'pc_settings_v4';
+  var K_FICHAS     = 'pc_fichas_v15';
+  var K_PROFS      = 'pc_profs_v12';
+  var K_PERGUNTAS  = 'pc_perguntas_v10';
+  var K_TURMAS     = 'pc_turmas_v10';
+  var K_SETTINGS   = 'pc_settings_v9';
   var SENHA_ADMIN  = 'admin123';
+  var MAX_DISCIPLINAS = 5;
 
   var COMPONENTES = ['Arte','Ciências','Educação Física','Ensino Religioso','Geografia','História','Língua Inglesa','Língua Portuguesa','Matemática'];
 
@@ -734,8 +768,148 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
   function turmasPorTurno(turno){ return getTurmas().filter(function(t){ return t.turno === turno; }).sort(function(a,b){ return a.nome.localeCompare(b.nome,'pt-BR'); }); }
   function getTurma(nome){ return getTurmas().find(function(t){ return t.nome === nome; }); }
 
-  function preencherSelectDisciplinas(){
-    $('#profDisciplinas').innerHTML = COMPONENTES.map(function(c){ return '<option value="'+esc(c)+'">'+esc(c)+'</option>'; }).join('');
+  function vinculosDoProfessor(prof, turma){
+    var vinculos = prof.vinculos || [];
+    if(!turma) return vinculos;
+    var v = vinculos.find(function(x){ return x.turma === turma; });
+    return v ? (v.disciplinas || []) : [];
+  }
+  function turmasVinculadas(prof){
+    var v = prof.vinculos || [];
+    return v.map(function(x){ return x.turma; });
+  }
+
+  function calcularPendenciasProfessor(){
+    if(!professorLogado) return [];
+    var vinculadas = turmasVinculadas(professorLogado);
+    var fichas = getFichas();
+    var pendentes = [];
+    vinculadas.forEach(function(turmaNome){
+      var jaRespondeu = fichas.some(function(f){
+        return f.professor === professorLogado.nome && f.turma === turmaNome;
+      });
+      if(!jaRespondeu){
+        var t = getTurma(turmaNome);
+        pendentes.push({ turma: turmaNome, turno: t ? t.turno : '—' });
+      }
+    });
+    return pendentes;
+  }
+
+  function renderCobranca(){
+    if(!professorLogado) return;
+    var pendentes = calcularPendenciasProfessor();
+    var publicadas = perguntasPublicadas();
+
+    var chip = $('#userChip');
+    if(pendentes.length && publicadas){
+      chip.innerHTML = esc(professorLogado.nome) +
+        ' <span class="badge-pend">' + pendentes.length + ' pendente' + (pendentes.length===1?'':'s') + '</span>';
+    } else {
+      chip.textContent = professorLogado.nome;
+    }
+
+    var banner = $('#avisoCobranca');
+    if(pendentes.length && publicadas){
+      banner.classList.remove('hidden');
+      banner.style.background = '';
+      banner.style.borderColor = '';
+      banner.style.borderLeftColor = '';
+      var lista = pendentes.map(function(p){
+        return '<span class="pend-tag">' + esc(p.turno) + ' · ' + esc(p.turma) + '</span>';
+      }).join('');
+      banner.innerHTML =
+        '<strong>Você possui ' + pendentes.length + ' pré-conselho(s) para responder</strong>' +
+        '<p>Selecione o <strong>turno</strong>, a <strong>turma</strong> e marque as <strong>disciplinas</strong> abaixo.</p>' +
+        '<div class="pendencias-list">' + lista + '</div>';
+    } else if(pendentes.length === 0 && publicadas && turmasVinculadas(professorLogado).length){
+      banner.classList.remove('hidden');
+      banner.style.background = '#f0fdf4';
+      banner.style.borderColor = '#b8e0c4';
+      banner.style.borderLeftColor = 'var(--green)';
+      banner.innerHTML =
+        '<strong style="color:var(--green)">Todos os pré-conselhos foram respondidos</strong>' +
+        '<p style="color:var(--green)">Obrigado pelo envio. Você pode revisar suas respostas nas fichas salvas abaixo.</p>';
+    } else {
+      banner.classList.add('hidden');
+      banner.style.background = '';
+      banner.style.borderColor = '';
+      banner.style.borderLeftColor = '';
+    }
+  }
+
+  function renderVinculosForm(vinculosExistentes){
+    var container = $('#vinculosContainer');
+    var turmas = getTurmas().slice().sort(function(a,b){
+      if(a.turno !== b.turno) return a.turno === 'Matutino' ? -1 : 1;
+      return a.nome.localeCompare(b.nome,'pt-BR');
+    });
+
+    if(!turmas.length){
+      container.innerHTML = '<p style="font-size:.8125rem;color:var(--slate-500);padding:12px;font-style:italic;text-transform:none;letter-spacing:0">Cadastre turmas primeiro na aba <strong>Turmas</strong>.</p>';
+      return;
+    }
+
+    var mapa = {};
+    (vinculosExistentes||[]).forEach(function(v){ mapa[v.turma] = v.disciplinas || []; });
+
+    var html = '';
+    var turnoAtual = '';
+    turmas.forEach(function(t){
+      if(t.turno !== turnoAtual){
+        turnoAtual = t.turno;
+        html += '<div class="vinculo-turno-titulo">'+esc(turnoAtual)+'</div>';
+      }
+      var selecionadas = mapa[t.nome] || [];
+      var ativo = selecionadas.length > 0;
+      html += '<div class="vinculo-item'+(ativo?' ativo':'')+'" data-turma="'+esc(t.nome)+'">'+
+        '<label class="vinculo-check"><input type="checkbox" data-turma="'+esc(t.nome)+'" '+(ativo?'checked':'')+'><span>'+esc(t.nome)+'</span></label>'+
+        '<div class="vinculo-disciplinas'+(ativo?'':' hidden')+'">'+
+          '<small>Até '+MAX_DISCIPLINAS+' disciplinas (Ctrl para várias)</small>'+
+          '<select multiple size="4" data-turma="'+esc(t.nome)+'">'+
+            COMPONENTES.map(function(c){
+              var sel = selecionadas.indexOf(c) > -1 ? 'selected' : '';
+              return '<option value="'+esc(c)+'" '+sel+'>'+esc(c)+'</option>';
+            }).join('')+
+          '</select>'+
+        '</div>'+
+      '</div>';
+    });
+    container.innerHTML = html;
+  }
+
+  function coletarVinculos(){
+    var vinculos = [];
+    $$('#vinculosContainer .vinculo-item').forEach(function(item){
+      var turma = item.dataset.turma;
+      var check = item.querySelector('input[type="checkbox"]');
+      if(!check || !check.checked) return;
+      var sel = item.querySelector('select');
+      var discs = sel ? Array.from(sel.selectedOptions).map(function(o){ return o.value; }) : [];
+      vinculos.push({ turma: turma, disciplinas: discs });
+    });
+    return vinculos;
+  }
+
+  function tratarCliqueVinculos(e){
+    var t = e.target;
+    if(t.type === 'checkbox'){
+      var item = t.closest('.vinculo-item');
+      var disc = item.querySelector('.vinculo-disciplinas');
+      if(t.checked){ item.classList.add('ativo'); disc.classList.remove('hidden'); }
+      else { item.classList.remove('ativo'); disc.classList.add('hidden'); }
+    }
+  }
+  function tratarChangeVinculos(e){
+    var t = e.target;
+    if(t.tagName === 'SELECT' && t.multiple){
+      var opts = Array.from(t.selectedOptions);
+      if(opts.length > MAX_DISCIPLINAS){
+        var extras = opts.slice(MAX_DISCIPLINAS);
+        extras.forEach(function(o){ o.selected = false; });
+        toast('Máximo de '+MAX_DISCIPLINAS+' disciplinas por turma.','erro');
+      }
+    }
   }
 
   function tratarLogin(e){
@@ -784,10 +958,11 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     $('#viewProfessor').classList.remove('hidden');
     if(!$('#dataFicha').value) $('#dataFicha').value = hojeISO();
     $('#professor').value = prof.nome;
-    renderDisciplinasProfessor();
-    renderMinhasFichas();
     atualizarTurmasProfessor();
+    renderDisciplinasCheckboxes();
+    renderMinhasFichas();
     verificarEstadoInicial();
+    renderCobranca();
     toast('Bem-vindo(a), ' + prof.nome.split(' ')[0] + '.','sucesso');
     window.scrollTo(0,0);
   }
@@ -807,16 +982,54 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
   }
 
   function renderDisciplinasProfessor(){
-    var disc = (professorLogado.disciplinas||[]);
+    var turma = $('#turma').value;
+    var disc;
+    if(turma){
+      disc = vinculosDoProfessor(professorLogado, turma);
+    } else {
+      var todas = [];
+      (professorLogado.vinculos||[]).forEach(function(v){
+        (v.disciplinas||[]).forEach(function(d){ if(todas.indexOf(d) === -1) todas.push(d); });
+      });
+      disc = todas;
+    }
     var html = disc.length
       ? disc.map(function(d){ return '<span class="badge">'+esc(d)+'</span>'; }).join('')
-      : '<span style="font-size:.75rem;color:var(--slate-500)">Nenhuma disciplina cadastrada</span>';
+      : '<span style="font-size:.75rem;color:var(--slate-500)">'+(turma?'Nenhuma disciplina vinculada a esta turma':'Selecione uma turma')+'</span>';
     $('#minhasDisciplinas').innerHTML = html;
+  }
+
+  /* ===== CHECKBOXES DE DISCIPLINAS ===== */
+  function renderDisciplinasCheckboxes(discsSelecionadas){
+    var turma = $('#turma').value;
+    var wrap = $('#disciplinasCheckboxes');
+    if(!turma){
+      wrap.innerHTML = '<span style="font-size:.75rem;color:var(--slate-500);text-transform:none;letter-spacing:0">Selecione a turma primeiro</span>';
+      return;
+    }
+    var discs = vinculosDoProfessor(professorLogado, turma);
+    if(!discs.length){
+      wrap.innerHTML = '<span style="font-size:.75rem;color:var(--slate-500);text-transform:none;letter-spacing:0">Nenhuma disciplina vinculada a esta turma</span>';
+      return;
+    }
+    var sel = discsSelecionadas || [];
+    wrap.innerHTML = discs.map(function(d){
+      var checked = sel.indexOf(d) > -1 ? 'checked' : '';
+      return '<label class="disc-check">'+
+        '<input type="checkbox" value="'+esc(d)+'" '+checked+'>'+
+        '<span>'+esc(d)+'</span>'+
+      '</label>';
+    }).join('');
+  }
+
+  function coletarDisciplinasSelecionadas(){
+    return $$('#disciplinasCheckboxes input[type="checkbox"]:checked').map(function(c){ return c.value; });
   }
 
   function verificarEstadoInicial(){
     var publicadas = perguntasPublicadas();
     var aviso = $('#avisoNaoPublicado');
+
     if(!publicadas){
       aviso.classList.remove('hidden');
       $('#secaoPerguntas').classList.add('hidden');
@@ -828,8 +1041,9 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
       $('#avisoJaRespondeu').classList.add('hidden');
       return;
     }
+
     aviso.classList.add('hidden');
-    $('#secaoPerguntas').classList.remove('hidden');
+    $('#secaoPerguntas').classList.add('hidden');
     $('#secaoPanorama').classList.add('hidden');
     $('#secaoDesempenho').classList.add('hidden');
     $('#secaoDestaques').classList.add('hidden');
@@ -882,13 +1096,16 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     var corpo = $('#corpoTabela');
     if(!fichas.length){ corpo.innerHTML = '<tr><td colspan="7" class="tabela-vazia">Nenhum pré-conselho encontrado.</td></tr>'; return; }
     corpo.innerHTML = fichas.map(function(f){
-      var disc = (f.disciplinas||[]).slice(0,2).join(', ') + ((f.disciplinas||[]).length > 2 ? '...' : '');
+      var discs = (f.disciplinasAvaliadas||[]);
+      var discHtml = discs.length
+        ? discs.map(function(d){ return '<span class="badge badge-disciplina">'+esc(d)+'</span>'; }).join(' ')
+        : '<span class="text-muted">—</span>';
       return '<tr>'+
         '<td>'+dataBR(f.data)+'</td>'+
         '<td>'+(f.turno?'<span class="badge badge-turno">'+esc(f.turno)+'</span>':'—')+'</td>'+
         '<td><strong>'+esc(f.turma||'—')+'</strong></td>'+
+        '<td>'+discHtml+'</td>'+
         '<td>'+esc(f.professor||'—')+'</td>'+
-        '<td class="text-muted">'+esc(disc||'—')+'</td>'+
         '<td class="text-muted">'+dataHoraBR(f.atualizadoEm||f.criadoEm)+'</td>'+
         '<td><div class="acoes">'+
           '<button class="btn btn-outline btn-sm" data-acao="ver" data-id="'+f.id+'">Visualizar</button>'+
@@ -1006,13 +1223,14 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     var cont = $('#listaProfessores');
     if(!lista.length){ cont.innerHTML = '<p class="tabela-vazia">Nenhum professor cadastrado.</p>'; return; }
     cont.innerHTML = lista.map(function(p){
-      var disp = (p.disciplinas||[]).length ? p.disciplinas.join(' · ') : 'Sem disciplinas';
+      var vinc = (p.vinculos||[]).map(function(v){
+        return '<span class="tag azul" style="display:inline-block">'+esc(v.turma)+' · '+esc((v.disciplinas||[]).join(', ')||'sem disciplina')+'</span>';
+      }).join('') || '<span class="small-info">Sem turmas vinculadas</span>';
       return '<div class="item-card">'+
         '<div class="info">'+
           '<strong>'+esc(p.nome)+'</strong>'+
-          '<span class="tag azul">'+esc(p.email||'—')+'</span>'+
-          '<span class="tag amarelo">Senha: '+esc(p.senha||'—')+'</span>'+
-          '<span class="small-info">'+esc(disp)+'</span>'+
+          '<span class="tag amarelo">@'+esc(p.email||'—')+'</span>'+
+          '<div style="margin-top:8px">'+vinc+'</div>'+
         '</div>'+
         '<div class="acoes">'+
           '<button class="btn btn-outline btn-sm" data-acao="editar-prof" data-id="'+p.id+'">Editar</button>'+
@@ -1027,27 +1245,44 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     var nome = $('#profNome').value.trim();
     var email = $('#profEmail').value.trim().replace(/^@/,'');
     var senha = $('#profSenha').value.trim();
-    var disciplinas = Array.from($('#profDisciplinas').selectedOptions).map(function(o){ return o.value; });
     var obs = $('#profObs').value.trim();
+    var vinculos = coletarVinculos();
+
     if(!nome || !email || !senha){ toast('Preencha nome, @escola e senha.','erro'); return; }
     if(senha.length < 4){ toast('A senha precisa ter pelo menos 4 caracteres.','erro'); return; }
+    if(!vinculos.length){ toast('Selecione ao menos uma turma para vincular o professor.','erro'); return; }
+
+    var semDisc = vinculos.find(function(v){ return !v.disciplinas.length; });
+    if(semDisc){ toast('Escolha pelo menos 1 disciplina na turma '+semDisc.turma+'.','erro'); return; }
+
     var profs = getProfs();
     var dup = profs.find(function(p){ return p.id !== id && norm(p.email) === norm(email); });
     if(dup){ toast('Já existe um professor com esse @escola.','erro'); return; }
+
+    var todasDisc = [];
+    vinculos.forEach(function(v){
+      (v.disciplinas||[]).forEach(function(d){ if(todasDisc.indexOf(d) === -1) todasDisc.push(d); });
+    });
+
     var agora = new Date().toISOString();
     if(id){
       var idx = profs.findIndex(function(p){ return p.id === id; });
-      if(idx > -1) profs[idx] = Object.assign({}, profs[idx], { nome:nome, email:email, senha:senha, disciplinas:disciplinas, obs:obs, atualizadoEm:agora });
+      if(idx > -1) profs[idx] = Object.assign({}, profs[idx], { nome:nome, email:email, senha:senha, vinculos:vinculos, disciplinas:todasDisc, obs:obs, atualizadoEm:agora });
       toast('Professor atualizado.','sucesso');
     } else {
-      profs.push({ id:uid('p'), nome:nome, email:email, senha:senha, disciplinas:disciplinas, obs:obs, criadoEm:agora, atualizadoEm:agora });
+      profs.push({ id:uid('p'), nome:nome, email:email, senha:senha, vinculos:vinculos, disciplinas:todasDisc, obs:obs, criadoEm:agora, atualizadoEm:agora });
       toast('Professor cadastrado.','sucesso');
     }
     setProfs(profs);
     limparFormProf();
     renderProfessores();
   }
-  function limparFormProf(){ $('#profForm').reset(); $('#profId').value = ''; $('#profFormTitulo').textContent = 'Cadastrar professor'; }
+  function limparFormProf(){
+    $('#profForm').reset();
+    $('#profId').value = '';
+    $('#profFormTitulo').textContent = 'Cadastrar professor';
+    renderVinculosForm([]);
+  }
   function editarProfessor(id){
     var p = getProfs().find(function(x){ return x.id === id; });
     if(!p) return;
@@ -1056,7 +1291,7 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     $('#profEmail').value = p.email||'';
     $('#profSenha').value = p.senha||'';
     $('#profObs').value = p.obs||'';
-    Array.from($('#profDisciplinas').options).forEach(function(o){ o.selected = (p.disciplinas||[]).indexOf(o.value) > -1; });
+    renderVinculosForm(p.vinculos||[]);
     $('#profFormTitulo').textContent = 'Editar: ' + p.nome;
     window.scrollTo(0,0);
   }
@@ -1150,9 +1385,18 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     var turno = $('#turno').value;
     var sel = $('#turma');
     if(!turno){ sel.disabled = true; sel.innerHTML = '<option value="">Selecione o turno primeiro</option>'; return; }
-    var lista = turmasPorTurno(turno);
+
+    var vinculadas = turmasVinculadas(professorLogado);
+    var lista = turmasPorTurno(turno).filter(function(t){
+      if(!vinculadas.length) return true;
+      return vinculadas.indexOf(t.nome) > -1;
+    });
+
     sel.disabled = false;
-    if(!lista.length){ sel.innerHTML = '<option value="">Nenhuma turma neste turno</option>'; return; }
+    if(!lista.length){
+      sel.innerHTML = '<option value="">Nenhuma turma vinculada neste turno</option>';
+      return;
+    }
     sel.innerHTML = '<option value="">Selecione a turma</option>' + lista.map(function(t){
       return '<option value="'+esc(t.nome)+'">'+esc(t.nome)+' ('+(t.alunos||[]).length+' alunos)</option>';
     }).join('');
@@ -1161,17 +1405,43 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
   function aoEscolherTurma(){
     var turno = $('#turno').value;
     var turma = $('#turma').value;
-    if(!turno || !turma){ esconderSecoes(); return; }
-    if(!perguntasPublicadas()){ esconderSecoes(); $('#avisoNaoPublicado').classList.remove('hidden'); return; }
+    var discs = coletarDisciplinasSelecionadas();
+
+    renderDisciplinasProfessor();
+
+    // Sem turno, turma ou nenhuma disciplina → esconde tudo
+    if(!turno || !turma || !discs.length){
+      $('#secaoPerguntas').classList.add('hidden');
+      esconderSecoes();
+      $('#avisoJaRespondeu').classList.add('hidden');
+      return;
+    }
+
+    if(!perguntasPublicadas()){
+      $('#secaoPerguntas').classList.add('hidden');
+      esconderSecoes();
+      $('#avisoNaoPublicado').classList.remove('hidden');
+      return;
+    }
     $('#avisoNaoPublicado').classList.add('hidden');
+
+    // A ficha é única por professor + turma
     var fichaExistente = getFichas().find(function(f){
-      return f.professor === professorLogado.nome && f.turno === turno && f.turma === turma;
+      return f.professor === professorLogado.nome
+          && f.turno === turno
+          && f.turma === turma;
     });
+
     $('#secaoPerguntas').classList.remove('hidden');
+
     if(fichaExistente){
       $('#avisoJaRespondeu').classList.remove('hidden');
       $('#fichaId').value = fichaExistente.id;
       $('#respostasSalvas').value = '1';
+      // Se a ficha tinha disciplinas salvas, restaura os checkboxes
+      if(fichaExistente.disciplinasAvaliadas && fichaExistente.disciplinasAvaliadas.length){
+        renderDisciplinasCheckboxes(fichaExistente.disciplinasAvaliadas);
+      }
       renderPerguntasForm(fichaExistente.respostas||{});
       atualizarEstadoBloqueio(true);
       $('#statusPerguntas').textContent = 'Respondido';
@@ -1188,7 +1458,7 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
       $('#statusPerguntas').textContent = 'Pendente';
       $('#statusPerguntas').classList.remove('ok');
       renderPerguntasForm({});
-      esconderSecoes(true);
+      esconderSecoes();
     }
   }
 
@@ -1251,10 +1521,16 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     if(!perguntasPublicadas()){ toast('As perguntas ainda não foram publicadas.','erro'); return; }
     if(!$('#turno').value){ toast('Selecione o Turno.','erro'); return; }
     if(!$('#turma').value){ toast('Selecione a Turma.','erro'); return; }
+
+    var disciplinas = coletarDisciplinasSelecionadas();
+    if(!disciplinas.length){ toast('Marque ao menos uma disciplina.','erro'); return; }
+
     if(!$('#dataFicha').value){ toast('Informe a Data.','erro'); return; }
 
     var existente = getFichas().find(function(f){
-      return f.professor === professorLogado.nome && f.turno === $('#turno').value && f.turma === $('#turma').value;
+      return f.professor === professorLogado.nome
+          && f.turno === $('#turno').value
+          && f.turma === $('#turma').value;
     });
     if(existente && $('#fichaId').value === ''){
       toast('Você já respondeu o questionário desta turma.','erro');
@@ -1269,10 +1545,13 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     var idAtual = $('#fichaId').value;
     var agora = new Date().toISOString();
 
+    var disc = vinculosDoProfessor(professorLogado, $('#turma').value);
+
     var dados = {
       turno: $('#turno').value,
       turma: $('#turma').value,
-      disciplinas: professorLogado.disciplinas || [],
+      disciplinasAvaliadas: disciplinas,
+      disciplinas: disc,
       professor: professorLogado.nome,
       professorId: professorLogado.id,
       data: $('#dataFicha').value,
@@ -1302,6 +1581,7 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     renderAlunosAtencao(fichaAtual.alunosAtencao||[]);
     toast('Respostas salvas com sucesso.','sucesso');
     renderMinhasFichas();
+    renderCobranca();
   }
 
   function renderPanorama(ficha){
@@ -1395,11 +1675,16 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     if($('#respostasSalvas').value !== '1'){ toast('Responda o formulário primeiro.','erro'); return; }
     var idAtual = $('#fichaId').value;
     if(!idAtual){ toast('Salve as respostas primeiro.','erro'); return; }
+
+    var disciplinas = coletarDisciplinasSelecionadas();
+    if(!disciplinas.length){ toast('Marque ao menos uma disciplina.','erro'); return; }
+
     var alunosDestaque = $$('#destaquesConteudo input[type="checkbox"]:checked').map(function(c){ return c.dataset.aluno; });
     var alunosAtencao = $$('#atencaoConteudo input[type="checkbox"]:checked').map(function(c){ return c.dataset.aluno; });
     var fichas = getFichas();
     var idx = fichas.findIndex(function(f){ return f.id === idAtual; });
     if(idx === -1){ toast('Pré-conselho não encontrado.','erro'); return; }
+    fichas[idx].disciplinasAvaliadas = disciplinas;
     fichas[idx].alunosDestaque = alunosDestaque;
     fichas[idx].alunosAtencao = alunosAtencao;
     fichas[idx].atualizadoEm = new Date().toISOString();
@@ -1408,6 +1693,7 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     $('#statusSalvo').classList.remove('hidden');
     toast('Pré-conselho salvo.','sucesso');
     renderMinhasFichas();
+    renderCobranca();
   }
 
   function limparFormulario(){
@@ -1421,9 +1707,12 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     $('#statusPerguntas').classList.remove('ok');
     if(professorLogado) $('#professor').value = professorLogado.nome;
     atualizarTurmasProfessor();
+    renderDisciplinasCheckboxes();
+    renderDisciplinasProfessor();
     esconderSecoes();
     $('#avisoJaRespondeu').classList.add('hidden');
     verificarEstadoInicial();
+    renderCobranca();
   }
 
   function novaFicha(){ limparFormulario(); toast('Formulário limpo.','info'); window.scrollTo(0,0); }
@@ -1434,7 +1723,11 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     if(professorLogado && f.professor !== professorLogado.nome){ toast('Você só pode editar seus próprios pré-conselhos.','erro'); return; }
     $('#turno').value = f.turno||'';
     atualizarTurmasProfessor();
-    setTimeout(function(){ $('#turma').value = f.turma||''; aoEscolherTurma(); }, 0);
+    setTimeout(function(){
+      $('#turma').value = f.turma||'';
+      renderDisciplinasCheckboxes(f.disciplinasAvaliadas||[]);
+      aoEscolherTurma();
+    }, 0);
     $('#dataFicha').value = f.data||hojeISO();
     toast('Pré-conselho carregado para edição.','info');
     window.scrollTo(0,0);
@@ -1451,12 +1744,16 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     c.innerHTML = minhas.map(function(f){
       var nD = (f.alunosDestaque||[]).length;
       var nA = (f.alunosAtencao||[]).length;
+      var discsHtml = (f.disciplinasAvaliadas||[]).map(function(d){
+        return '<span class="tag amarelo">'+esc(d)+'</span>';
+      }).join('');
       return '<div class="item-card">'+
         '<div class="info">'+
           '<strong>'+esc(f.turma||'—')+'</strong>'+
           (f.turno?'<span class="tag azul">'+esc(f.turno)+'</span>':'')+
           (nD?'<span class="tag verde">'+nD+' destaque(s)</span>':'')+
           (nA?'<span class="tag vermelho">'+nA+' em atenção</span>':'')+
+          '<div style="margin-top:6px">'+discsHtml+'</div>'+
           '<span class="small-info">'+dataBR(f.data)+' · salvo em '+dataHoraBR(f.atualizadoEm||f.criadoEm)+'</span>'+
         '</div>'+
         '<div class="acoes">'+
@@ -1486,18 +1783,20 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
       var prefix = isDest ? '★ ' : (isAten ? '⚠ ' : '');
       return '<span class="chip'+cls+'">'+prefix+esc(n)+'</span>';
     }).join('') + '</div>' : '<p style="color:#94a3b8;font-style:italic">Nenhum aluno cadastrado.</p>';
-    var disciplinasTxt = (f.disciplinas||[]).join(' · ') || '—';
+    var disciplinasArr = f.disciplinasAvaliadas || [];
+    var disciplinasTxt = disciplinasArr.length ? disciplinasArr.join(' · ') : '—';
     return '<div class="doc">'+
       '<div class="doc-head"><h3>ECLA ESTADUAL DO CAMPO FREI GRACIANO DROESSLER</h3><p>Ensino Fundamental em Tempo Integral</p><h4>Pré-Conselho</h4></div>'+
       '<div class="doc-ident">'+
         '<div><span>Turno</span><strong>'+esc(f.turno||'—')+'</strong></div>'+
         '<div><span>Turma</span><strong>'+esc(f.turma||'—')+'</strong></div>'+
         '<div><span>Professor(a)</span><strong>'+esc(f.professor||'—')+'</strong></div>'+
-        '<div><span>Disciplinas</span><strong>'+esc(disciplinasTxt)+'</strong></div>'+
         '<div><span>Data</span><strong>'+dataBR(f.data)+'</strong></div>'+
       '</div>'+
-      '<section class="doc-secao"><h5>1. Formulário de Avaliação</h5>'+respostasHTML+'</section>'+
-      '<section class="doc-secao"><h5>2. Alunos da Turma — ★ destaque | ⚠ atenção</h5>'+alunosHTML+'</section>'+
+      '<section class="doc-secao"><h5>Disciplinas Avaliadas: '+esc(disciplinasTxt)+'</h5>'+
+        respostasHTML+
+      '</section>'+
+      '<section class="doc-secao"><h5>Alunos da Turma — ★ destaque | ⚠ atenção</h5>'+alunosHTML+'</section>'+
       '<div class="doc-rodape">'+
         '<div><span>Registrado em</span><strong>'+dataHoraBR(f.criadoEm)+'</strong></div>'+
         '<div><span>Atualizado em</span><strong>'+dataHoraBR(f.atualizadoEm||f.criadoEm)+'</strong></div>'+
@@ -1545,13 +1844,14 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     if(usuarioAtual === 'professor' && professorLogado && f.professor !== professorLogado.nome){
       toast('Você só pode excluir seus próprios pré-conselhos.','erro'); return;
     }
-    pedirConfirmacao('Excluir o pré-conselho de '+f.turma+' ('+dataBR(f.data)+')?', function(){
+    var desc = f.turma + ' ('+dataBR(f.data)+')';
+    pedirConfirmacao('Excluir o pré-conselho de '+desc+'?', function(){
       setFichas(getFichas().filter(function(x){ return x.id !== id; }));
       if(fichaNoModal && fichaNoModal.id === id) fecharModal();
       if($('#fichaId').value === id) limparFormulario();
       toast('Pré-conselho excluído.','info');
       if(usuarioAtual === 'admin') renderAdmin();
-      if(usuarioAtual === 'professor') renderMinhasFichas();
+      if(usuarioAtual === 'professor'){ renderMinhasFichas(); renderCobranca(); }
     }, 'Excluir pré-conselho', 'Excluir');
   }
 
@@ -1726,9 +2026,9 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
 
   function init(){
     seed();
-    preencherSelectDisciplinas();
     $('#dataFicha').value = hojeISO();
     atualizarRotuloLogin();
+    renderVinculosForm([]);
 
     $('#loginForm').addEventListener('submit', tratarLogin);
     $('#btnSair').addEventListener('click', sair);
@@ -1744,11 +2044,26 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     $('#turno').addEventListener('change', function(){
       atualizarTurmasProfessor();
       $('#turma').value = '';
+      renderDisciplinasCheckboxes();
+      renderDisciplinasProfessor();
       esconderSecoes();
       $('#avisoJaRespondeu').classList.add('hidden');
-      if(perguntasPublicadas()) $('#secaoPerguntas').classList.remove('hidden');
     });
-    $('#turma').addEventListener('change', aoEscolherTurma);
+
+    $('#turma').addEventListener('change', function(){
+      renderDisciplinasCheckboxes();
+      renderDisciplinasProfessor();
+      esconderSecoes();
+      $('#avisoJaRespondeu').classList.add('hidden');
+      $('#secaoPerguntas').classList.add('hidden');
+    });
+
+    // Delegar mudança nos checkboxes de disciplinas
+    $('#disciplinasCheckboxes').addEventListener('change', function(e){
+      if(e.target.matches('input[type="checkbox"]')){
+        aoEscolherTurma();
+      }
+    });
 
     $('#destaquesConteudo').addEventListener('change', function(e){
       if(e.target.matches('input[type="checkbox"]')) atualizarContDestaques();
@@ -1776,6 +2091,10 @@ td .acoes{display:flex;gap:6px;flex-wrap:wrap}
     $('#profForm').addEventListener('submit', salvarProfessor);
     $('#btnCancelarProf').addEventListener('click', limparFormProf);
     $('#listaProfessores').addEventListener('click', cliqueAcoesAdmin);
+
+    var vincContainer = $('#vinculosContainer');
+    vincContainer.addEventListener('click', tratarCliqueVinculos);
+    vincContainer.addEventListener('change', tratarChangeVinculos);
 
     $('#turmaForm').addEventListener('submit', salvarTurma);
     $('#btnCancelarTurma').addEventListener('click', limparFormTurma);
